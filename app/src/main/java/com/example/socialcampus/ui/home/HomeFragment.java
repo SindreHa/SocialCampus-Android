@@ -45,7 +45,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
-        final CardView card_view = getView().findViewById(R.id.kort);
+        final CardView card_view = getView().findViewById(R.id.cardView);
         final String LOG_TAG = HomeFragment.class.getSimpleName();
 
         card_view.setOnClickListener(new View.OnClickListener() {
