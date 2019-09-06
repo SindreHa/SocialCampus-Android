@@ -1,16 +1,16 @@
-package com.example.socialcampus.ui.share;
+package com.example.socialcampus.ui.about_us;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class ShareViewModel extends ViewModel {
+public class AboutUsViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public ShareViewModel() {
+    public AboutUsViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is share fragment");
+        mText.setValue("Om oss");
     }
 
     public LiveData<String> getText() {

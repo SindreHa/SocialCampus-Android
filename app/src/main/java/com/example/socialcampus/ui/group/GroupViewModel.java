@@ -1,16 +1,16 @@
-package com.example.socialcampus.ui.about_us;
+package com.example.socialcampus.ui.group;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class GalleryViewModel extends ViewModel {
+public class GroupViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public GalleryViewModel() {
+    public GroupViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("Om oss");
+        mText.setValue("Grupper");
     }
 
     public LiveData<String> getText() {

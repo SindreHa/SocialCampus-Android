@@ -1,4 +1,4 @@
-package com.example.socialcampus.ui.share;
+package com.example.socialcampus.ui.profile;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,22 +12,24 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import com.example.socialcampus.R;
 
-public class ShareFragment extends Fragment {
+public class ProfileFragment extends Fragment {
 
-    private ShareViewModel shareViewModel;
+    private ProfileViewModel shareViewModel;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-            ViewGroup container, Bundle savedInstanceState) {
-        shareViewModel =
-                ViewModelProviders.of(this).get(ShareViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_share, container, false);
-        final TextView textView = root.findViewById(R.id.text_share);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        shareViewModel = ViewModelProviders.of(this).get(ProfileViewModel.class);
+
+        View root = inflater.inflate(R.layout.fragment_profile, container, false);
+        final TextView textView = root.findViewById(R.id.text_profile);
+
         shareViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
             }
         });
+
         return root;
     }
 }
