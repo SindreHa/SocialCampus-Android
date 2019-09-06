@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Login_signup</string>
+    <string name="socialcampus">SocialCampus</string>
+    <string name="socialcampuslogo">Socialcampuslogo</string>
+    <string name="glemt_passord">Glemt passord?</string>
+    <string name="passordL">Passord</string>
+    <string name="har_du_ikke_en_konto">Har du ikke en konto?</string>
+    <string name="brukernavnL">Brukernavn</string>
+    <string name="logg_inn">Logg inn</string>
+    <string name="logg_innR">Logg inn</string>
+    <string name="epost">EPOST</string>
+    <string name="passordR">PASSORD</string>
+    <string name="brukernavnR">BRUKERNAVN</string>
+    <string name="registrer_deg">Registrer deg</string>
+    <string name="lag_ny_konto">Lag ny konto</string>
+    <string name="logg_innbutton">Logg inn</string>
+    <string name="logg_inn_header">Logg inn</string>
+</resources>
