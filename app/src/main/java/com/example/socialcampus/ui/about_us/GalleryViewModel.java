@@ -1,4 +1,4 @@
-package com.example.socialcampus.ui.gallery;
+package com.example.socialcampus.ui.about_us;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -10,7 +10,7 @@ public class GalleryViewModel extends ViewModel {
 
     public GalleryViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is gallery fragment");
+        mText.setValue("Om oss");
     }
 
     public LiveData<String> getText() {

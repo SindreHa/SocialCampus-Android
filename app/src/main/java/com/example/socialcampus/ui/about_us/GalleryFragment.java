@@ -1,4 +1,4 @@
-package com.example.socialcampus.ui.gallery;
+package com.example.socialcampus.ui.about_us;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

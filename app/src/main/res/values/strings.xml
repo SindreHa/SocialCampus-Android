@@ -3,14 +3,12 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">SocialCampus</string>
-    <string name="nav_header_subtitle"></string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Instillinger</string>
 
     <string name="menu_home">Hjem</string>
-    <string name="menu_gallery">Om Oss</string>
-    <string name="menu_slideshow">Nytt Innlegg</string>
-    <string name="menu_tools">Slett</string>
-    <string name="menu_share">Logg Inn</string>
-    <string name="menu_send">Slett</string>
+    <string name="menu_about_us">Om Oss</string>
+    <string name="menu_groups">Grupper</string>
+    <string name="menu_log_in">Logg Inn</string>
+    <string name="menu_user">Profil</string>
 </resources>
