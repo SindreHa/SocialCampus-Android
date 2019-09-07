@@ -24,7 +24,6 @@
         <item>@drawable/kristian</item>
     </array>
 
-    <string name="app_name">Login_signup</string>
     <string name="socialcampus">SocialCampus</string>
     <string name="socialcampuslogo">Socialcampuslogo</string>
     <string name="glemt_passord">Glemt passord?</string>
