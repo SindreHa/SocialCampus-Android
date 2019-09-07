@@ -34,8 +34,8 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginRight="8dp"
                         app:cardBackgroundColor="@color/colorPrimaryDark"
-                        android:foreground="?android:selectableItemBackground"
                         app:cardCornerRadius="5dp"
+                        android:foreground="?android:selectableItemBackground"
                         android:clickable="true">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
@@ -106,7 +106,9 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginRight="8dp"
                         app:cardBackgroundColor="@color/colorPrimaryDark"
-                        app:cardCornerRadius="5dp">
+                        app:cardCornerRadius="5dp"
+                        android:foreground="?android:selectableItemBackground"
+                        android:clickable="true">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/linLay"
@@ -176,7 +178,9 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginRight="8dp"
                         app:cardBackgroundColor="@color/colorPrimaryDark"
-                        app:cardCornerRadius="5dp">
+                        app:cardCornerRadius="5dp"
+                        android:foreground="?android:selectableItemBackground"
+                        android:clickable="true">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/linLay"
@@ -246,7 +250,9 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginRight="8dp"
                         app:cardBackgroundColor="@color/colorPrimaryDark"
-                        app:cardCornerRadius="5dp">
+                        app:cardCornerRadius="5dp"
+                        android:foreground="?android:selectableItemBackground"
+                        android:clickable="true">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/linLay"
@@ -316,7 +322,9 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginRight="8dp"
                         app:cardBackgroundColor="@color/colorPrimaryDark"
-                        app:cardCornerRadius="5dp">
+                        app:cardCornerRadius="5dp"
+                        android:foreground="?android:selectableItemBackground"
+                        android:clickable="true">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/linLay"
