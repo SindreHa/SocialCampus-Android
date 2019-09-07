@@ -27,7 +27,7 @@
             android:textSize="30sp"
             android:textStyle="bold" />
 
-        <custom_font.MyTextView
+        <TextView
             android:id="@+id/header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
             android:orientation="vertical">
 
 
-            <custom_font.MyEditText
+            <EditText
                 android:id="@+id/usernameL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
                 >
             </LinearLayout>
 
-            <custom_font.MyEditText
+            <EditText
                 android:id="@+id/passordL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -91,7 +91,7 @@
                 >
             </LinearLayout>
 
-            <custom_font.MyTextView
+            <TextView
                 android:id="@+id/loginbutton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -115,7 +115,7 @@
             android:layout_marginRight="20dp"
             >
 
-            <custom_font.MyTextView
+            <TextView
                 android:id="@+id/create"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -124,7 +124,7 @@
                 android:textColor="#2C3646"
                 android:textSize="13sp" />
 
-            <custom_font.MyTextView
+            <TextView
                 android:id="@+id/forgotpassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
