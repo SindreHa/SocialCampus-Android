@@ -11,4 +11,17 @@
     <string name="menu_groups">Grupper</string>
     <string name="menu_log_in">Logg Inn</string>
     <string name="menu_user">Profil</string>
+
+    <string-array name="about_us_names">
+        <item>Sindre Haavaldsen</item>
+        <item>Jan Andreas</item>
+        <item>Kristian</item>
+    </string-array>
+
+    <array name="about_us_pictures">
+        <item>@drawable/sindre</item>
+        <item>@drawable/jan</item>
+        <item>@drawable/kristian</item>
+    </array>
+
 </resources>
