@@ -1,138 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00FFFFFF"
+    android:backgroundTint="#00FFFFFF">
+
+    <ImageView
+        android:id="@+id/sclogo"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="70dp"
+        android:layout_marginTop="30dp"
+        android:contentDescription="@string/socialcampuslogo"
+        android:src="@mipmap/ic_logo"
+        app:srcCompat="@mipmap/ic_logo" />
 
-        <ImageView
-            android:id="@+id/sclogo"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_marginTop="30dp"
-            android:contentDescription="@string/socialcampuslogo"
-            android:src="@mipmap/ic_logo"
-            app:srcCompat="@mipmap/ic_logo" />
+    <TextView
+        android:id="@+id/socialcampus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sclogo"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="@string/socialcampus"
+        android:textColor="#185A72"
+        android:textSize="30sp"
+        android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/socialcampus"
+    <TextView
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/socialcampus"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:text="@string/logg_inn_header"
+        android:textColor="#FFFFFF"
+        android:textSize="17sp" />
+
+    <LinearLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="20dp"
+        android:orientation="vertical">
+
+
+        <EditText
+            android:id="@+id/usernameL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/sclogo"
+            android:background="#00000000"
+            android:hint="@string/brukernavnL"
+            android:inputType="text"
+            android:paddingStart="8dp"
+            android:paddingLeft="8dp"
+            android:textColorHint="#FFFFFF"
+            android:textSize="13sp"
+            android:autofillHints="" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
             android:layout_marginTop="10dp"
+            android:background="#a9b0c3"
+            android:layout_below="@+id/main"
+
+            ></LinearLayout>
+
+        <EditText
+            android:id="@+id/passordL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:background="#00000000"
+            android:hint="@string/passordL"
+            android:inputType="textPassword"
+            android:paddingStart="8dp"
+            android:paddingLeft="8dp"
+            android:textColorHint="#FFFFFF"
+            android:textSize="13sp"
+            android:autofillHints="" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="10dp"
+            android:background="#a9b0c3"></LinearLayout>
+
+        <TextView
+            android:id="@+id/loginbutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/round"
             android:gravity="center"
-            android:text="@string/socialcampus"
-            android:textColor="#2C3646"
-            android:textSize="30sp"
+            android:padding="14dp"
+            android:text="@string/logg_innbutton"
+            android:textColor="#CBD1DC"
             android:textStyle="bold" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="15dp"
+        android:orientation="horizontal">
+
         <TextView
-            android:id="@+id/header"
-            android:layout_width="match_parent"
+            android:id="@+id/create"
+            android:layout_width="279dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/socialcampus"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
-            android:text="@string/logg_inn_header"
-            android:textColor="#00051f"
-            android:textSize="17sp" />
-        <LinearLayout
-            android:id="@+id/main"
-            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:text="@string/har_du_ikke_en_konto"
+            android:textColor="#FFFFFF"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/forgotpassword"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/header"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="50dp"
-            android:orientation="vertical">
+            android:text="@string/glemt_passord"
+            android:textColor="#FFFFFF"
+
+            android:textSize="13sp" />
+    </LinearLayout>
 
 
-            <EditText
-                android:id="@+id/usernameL"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#00000000"
-                android:hint="@string/brukernavnL"
-                android:inputType="text"
-                android:paddingLeft="8dp"
-                android:textColorHint="#a9b0c3"
-                android:textSize="13sp"
-                android:paddingStart="8dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="#a9b0c3"
-                android:layout_marginTop="10dp"
-
-                >
-            </LinearLayout>
-
-            <EditText
-                android:id="@+id/passordL"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:background="#00000000"
-                android:hint="@string/passordL"
-                android:inputType="textPassword"
-                android:paddingLeft="8dp"
-                android:textColorHint="#a9b0c3"
-                android:textSize="13sp"
-                android:paddingStart="8dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="#a9b0c3"
-                android:layout_marginTop="10dp"
-                >
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/loginbutton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:background="@drawable/round"
-                android:gravity="center"
-                android:padding="14dp"
-                android:text="@string/logg_innbutton"
-                android:textColor="#CBD1DC"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="15dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            >
-
-            <TextView
-                android:id="@+id/create"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/har_du_ikke_en_konto"
-                android:textColor="#2C3646"
-                android:textSize="13sp" />
-
-            <TextView
-                android:id="@+id/forgotpassword"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/glemt_passord"
-                android:textColor="#2C3646"
-
-                android:textSize="13sp" />
-        </LinearLayout>
-
-
-    </RelativeLayout>
+</RelativeLayout>
