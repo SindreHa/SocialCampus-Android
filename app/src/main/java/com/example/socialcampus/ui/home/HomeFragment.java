@@ -1,6 +1,7 @@
 package com.example.socialcampus.ui.home;
 
 import android.os.Bundle;
+import android.os.Debug;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -44,22 +45,23 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
-        final CardView card_view = getView().findViewById(R.id.cardView);
+        final CardView card_view = getView().findViewById(R.id.group1);
         final String LOG_TAG = HomeFragment.class.getSimpleName();
-        final GroupFragment groupFragment = new GroupFragment();
+        final PostFragment postFragment = new PostFragment();
 
         card_view.setOnClickListener(new View.OnClickListener() {
 
             //String getName = ((TextView)card_view.getChildAt(1)).getText().toString();
             @Override
             public void onClick(View v) {
-                Log.d(LOG_TAG, "Klikk på post");
-                displayToast("Klikk på post");
+                Log.d(LOG_TAG, "HomeFragment");
                 getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(((ViewGroup)getView().getParent()).getId(), groupFragment, "findThisFragment")
+                        .replace(((ViewGroup)getView().getParent()).getId(), postFragment, "findThisFragment")
                         .addToBackStack(null)
                         .commit();
             }
         });
     }
+
+
 }

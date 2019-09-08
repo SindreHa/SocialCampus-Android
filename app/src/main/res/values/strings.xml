@@ -1,30 +1,25 @@
 <resources>
-    <string name="app_name">Social Campus</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Social Campus</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Instillinger</string>
-
-    <string name="menu_home">Hjem</string>
-    <string name="menu_about_us">Om Oss</string>
-    <string name="menu_groups">Grupper</string>
-    <string name="menu_log_in">Logg Inn</string>
-    <string name="menu_user">Profil</string>
-
-    <string-array name="about_us_names">
-        <item>Sindre Haavaldsen</item>
-        <item>Jan Andreas</item>
-        <item>Kristian</item>
-    </string-array>
-
     <array name="about_us_pictures">
         <item>@drawable/sindre</item>
         <item>@drawable/jan</item>
         <item>@drawable/kristian</item>
     </array>
+    <string name="app_name">Social Campus</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Social Campus</string>
+    <string name="nav_header_desc">Navigation header</string>
+
+    <string name="action_settings">Instillinger</string>
+    <string name="menu_home">Hjem</string>
+    <string name="menu_about_us">Om Oss</string>
+    <string name="menu_groups">Grupper</string>
+    <string name="menu_log_in">Logg Inn</string>
+
+    <string name="menu_user">Profil</string>
 
     <string name="socialcampus">SocialCampus</string>
+
     <string name="socialcampuslogo">Socialcampuslogo</string>
     <string name="glemt_passord">Glemt passord?</string>
     <string name="passordL">Passord</string>
@@ -39,5 +34,13 @@
     <string name="lag_ny_konto">Lag ny konto</string>
     <string name="logg_innbutton">Logg inn</string>
     <string name="logg_inn_header">Logg inn</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string-array name="about_us_names">
+        <item>Sindre Haavaldsen</item>
+        <item>Jan Andreas</item>
+        <item>Kristian</item>
+    </string-array>
 
 </resources>
