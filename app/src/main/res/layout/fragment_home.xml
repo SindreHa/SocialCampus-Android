@@ -65,7 +65,8 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="80dp"
-                        android:padding="@dimen/group_card_info_padding"
+                        android:paddingTop="@dimen/group_card_info_padding_vertical"
+                        android:paddingBottom="@dimen/group_card_info_padding_vertical"
                         android:paddingRight="@dimen/group_card_info_padding_horizontal"
                         android:paddingLeft="@dimen/group_card_info_padding_horizontal"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -89,8 +90,7 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/about_us_name"
-                            android:layout_marginTop="0dp">
+                            app:layout_constraintTop_toBottomOf="@+id/about_us_name">
 
                             <androidx.appcompat.widget.AppCompatImageView
                                 android:id="@+id/group_card_members"
@@ -162,8 +162,10 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="80dp"
-
-                        android:padding="@dimen/group_card_info_padding"
+                        android:paddingTop="@dimen/group_card_info_padding_vertical"
+                        android:paddingBottom="@dimen/group_card_info_padding_vertical"
+                        android:paddingRight="@dimen/group_card_info_padding_horizontal"
+                        android:paddingLeft="@dimen/group_card_info_padding_horizontal"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/about_us_picture" >
 
@@ -258,8 +260,10 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="80dp"
-
-                        android:padding="@dimen/group_card_info_padding"
+                        android:paddingTop="@dimen/group_card_info_padding_vertical"
+                        android:paddingBottom="@dimen/group_card_info_padding_vertical"
+                        android:paddingRight="@dimen/group_card_info_padding_horizontal"
+                        android:paddingLeft="@dimen/group_card_info_padding_horizontal"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/about_us_picture" >
 
