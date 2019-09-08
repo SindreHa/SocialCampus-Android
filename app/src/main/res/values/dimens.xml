@@ -5,6 +5,11 @@
     <dimen name="nav_header_vertical_spacing">8dp</dimen>
     <dimen name="nav_header_height">200dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="card_margin">5dp</dimen>
+    <dimen name="vertical_card_margin_vertical">6dp</dimen>
+    <dimen name="vertical_card_margin_horizontal">6dp</dimen>
+    <dimen name="horizontal_card_margin_vertical">3dp</dimen>
+    <dimen name="horizontal_card_margin_horizontal">5dp</dimen>
     <dimen name="card_radius">8dp</dimen>
+    <dimen name="group_card_info_padding">8dp</dimen>
+    <dimen name="group_card_info_padding_horizontal">12dp</dimen>
 </resources>
