@@ -53,7 +53,7 @@
                         android:layout_marginStart="16dp"
                         android:fontFamily="sans-serif-medium"
                         android:paddingRight="8dp"
-                        android:text="Sindre Haavaldsen"
+                        android:text="Brukernavn"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@color/colorAccent"
                         android:textSize="12sp"
@@ -125,7 +125,7 @@
                         android:layout_marginStart="16dp"
                         android:fontFamily="sans-serif-medium"
                         android:paddingRight="8dp"
-                        android:text="Sindre Haavaldsen"
+                        android:text="Brukernavn"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@color/colorAccent"
                         android:textSize="12sp"
@@ -197,7 +197,7 @@
                         android:layout_marginStart="16dp"
                         android:fontFamily="sans-serif-medium"
                         android:paddingRight="8dp"
-                        android:text="Sindre Haavaldsen"
+                        android:text="Brukernavn"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@color/colorAccent"
                         android:textSize="12sp"
@@ -269,7 +269,7 @@
                         android:layout_marginStart="16dp"
                         android:fontFamily="sans-serif-medium"
                         android:paddingRight="8dp"
-                        android:text="Sindre Haavaldsen"
+                        android:text="Brukernavn"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@color/colorAccent"
                         android:textSize="12sp"
@@ -341,7 +341,7 @@
                         android:layout_marginStart="16dp"
                         android:fontFamily="sans-serif-medium"
                         android:paddingRight="8dp"
-                        android:text="Sindre Haavaldsen"
+                        android:text="Brukernavn"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@color/colorAccent"
                         android:textSize="12sp"
@@ -368,9 +368,5 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="50dp" />
 
 </LinearLayout>
