@@ -39,17 +39,21 @@ public class HomeFragment extends Fragment {
                                     R.drawable.jan, R.drawable.sindre, R.drawable.kristian,
                                     R.drawable.jan, R.drawable.sindre, R.drawable.kristian,
                                     R.drawable.jan, R.drawable.sindre, R.drawable.kristian};
+
     private String[] description = new String[]{"Tennis", "Fotball", "Bordtennis", "Gaming", "Friluft",
                                             "Tennis", "Fotball", "Bordtennis", "Gaming", "Friluft",
                                             "Tennis", "Fotball", "Bordtennis", "Gaming", "Friluft"};
 
+    private int[] countMembers = new int[] {18, 16, 2, 91, 72, 1, 214, 28, 74, 32};
+
+    private int[] countPosts = new int[] {41, 32, 1, 42, 63, 75, 21, 42, 13, 52};
+
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
 
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
         for (int i = 0; i < 10; i++){
-            gCardList.addLast(new GroupBoxCard(imgList[i], description[i]));
+            gCardList.addLast(new GroupBoxCard(imgList[i], description[i], countMembers[i], countPosts[i]));
         }
 
         gRecyclerView = root.findViewById(R.id.recyclerView_group);

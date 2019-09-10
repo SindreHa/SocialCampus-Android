@@ -31,14 +31,14 @@ public class GroupBoxAdapter extends RecyclerView.Adapter<GroupBoxAdapter.GroupB
     @NonNull
     @Override
     public GroupBoxAdapter.GroupBoxHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = inflater.inflate(R.layout.group_box_item, parent, false);
+        View itemView = inflater.inflate(R.layout.group_card_home, parent, false);
         return new GroupBoxHolder(itemView,this);
     }
 
     @Override
     public void onBindViewHolder(@NonNull GroupBoxAdapter.GroupBoxHolder holder, int position) {
-        holder.img.setImageResource(boxCardList.get(position).getImagePath());
-        holder.description.setText(boxCardList.get(position).getDescription());
+        holder.sportImg.setImageResource(boxCardList.get(position).getImagePath());
+        holder.sportTitle.setText(boxCardList.get(position).getDescription());
 
     }
 
@@ -48,14 +48,18 @@ public class GroupBoxAdapter extends RecyclerView.Adapter<GroupBoxAdapter.GroupB
     }
 
     class GroupBoxHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        public final ImageView img;
-        public final TextView description;
+        public final ImageView sportImg;
+        public final TextView sportTitle;
+        public final TextView numMembers;
+        public final TextView numPosts;
         final GroupBoxAdapter adapter;
 
         public GroupBoxHolder(View itemView, GroupBoxAdapter adapter){
             super(itemView);
-            this.img = itemView.findViewById(R.id.group_imgView);
-            this.description = itemView.findViewById(R.id.group_textView);
+            this.sportImg = itemView.findViewById(R.id.group_card_img);
+            this.sportTitle = itemView.findViewById(R.id.group_card_title);
+            this.numMembers = itemView.findViewById(R.id.group_card_num_members);
+            this.numPosts = itemView.findViewById(R.id.group_card_num_posts);
             this.adapter = adapter;
             itemView.setOnClickListener(this);
         }
