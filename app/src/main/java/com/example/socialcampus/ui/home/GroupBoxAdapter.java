@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.socialcampus.R;
@@ -61,17 +62,11 @@ public class GroupBoxAdapter extends RecyclerView.Adapter<GroupBoxAdapter.GroupB
             this.numMembers = itemView.findViewById(R.id.group_card_num_members);
             this.numPosts = itemView.findViewById(R.id.group_card_num_posts);
             this.adapter = adapter;
-            itemView.setOnClickListener(this);
+            itemView.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_nav_home_to_nav_groups));
         }
 
         @Override
         public void onClick(View view) {
-                final PostFragment postFragment = new PostFragment();
-
-                homeFragment.getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(((ViewGroup)homeFragment.getView().getParent()).getId(), postFragment, "findThisFragment")
-                    .addToBackStack(null)
-                    .commit();
         }
     }
 }
