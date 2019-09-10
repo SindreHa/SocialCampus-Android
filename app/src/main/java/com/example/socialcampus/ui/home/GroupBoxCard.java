@@ -4,10 +4,10 @@ public class GroupBoxCard {
 
     private final int sportImg;
     private final String sportTitle;
-    private final int countMembers;
-    private final int countPosts;
+    private final String countMembers;
+    private final String countPosts;
 
-    public GroupBoxCard(int sportImg, String sportTitle, int countMembers, int countPosts){
+    public GroupBoxCard(int sportImg, String sportTitle, String countMembers, String countPosts){
         this.sportImg = sportImg;
         this.sportTitle = sportTitle;
         this.countMembers = countMembers;
@@ -22,11 +22,11 @@ public class GroupBoxCard {
         return this.sportTitle;
     }
 
-    public int getCountMembers(){
+    public String getCountMembers(){
         return this.countMembers;
     }
 
-    public int getCountPosts(){
+    public String getCountPosts(){
         return this.countPosts;
     }
 }

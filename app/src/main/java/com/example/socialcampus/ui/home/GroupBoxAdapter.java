@@ -40,7 +40,8 @@ public class GroupBoxAdapter extends RecyclerView.Adapter<GroupBoxAdapter.GroupB
     public void onBindViewHolder(@NonNull GroupBoxAdapter.GroupBoxHolder holder, int position) {
         holder.sportImg.setImageResource(boxCardList.get(position).getImagePath());
         holder.sportTitle.setText(boxCardList.get(position).getDescription());
-
+        holder.numMembers.setText(boxCardList.get(position).getCountMembers());
+        holder.numPosts.setText(boxCardList.get(position).getCountPosts());
     }
 
     @Override

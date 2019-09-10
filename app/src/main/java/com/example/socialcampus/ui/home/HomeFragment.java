@@ -34,19 +34,19 @@ public class HomeFragment extends Fragment {
     private GroupBoxAdapter gAdapter;
 
     // Hardkode for å vise recycleview (Sindre improve this ofc?)
-    private int[] imgList = new int[]{R.drawable.jan, R.drawable.sindre, R.drawable.kristian,
-                                    R.drawable.jan, R.drawable.sindre, R.drawable.kristian,
-                                    R.drawable.jan, R.drawable.sindre, R.drawable.kristian,
-                                    R.drawable.jan, R.drawable.sindre, R.drawable.kristian,
-                                    R.drawable.jan, R.drawable.sindre, R.drawable.kristian};
+    private int[] imgList = new int[]{R.drawable.tennis, R.drawable.fotball, R.drawable.bordtennis,
+                                    R.drawable.gaming, R.drawable.friluft, R.drawable.tennis,
+                                    R.drawable.fotball, R.drawable.bordtennis, R.drawable.gaming,
+                                    R.drawable.friluft, R.drawable.tennis, R.drawable.fotball,
+                                    R.drawable.bordtennis, R.drawable.gaming, R.drawable.friluft};
 
     private String[] description = new String[]{"Tennis", "Fotball", "Bordtennis", "Gaming", "Friluft",
                                             "Tennis", "Fotball", "Bordtennis", "Gaming", "Friluft",
                                             "Tennis", "Fotball", "Bordtennis", "Gaming", "Friluft"};
 
-    private int[] countMembers = new int[] {18, 16, 2, 91, 72, 1, 214, 28, 74, 32};
+    private String[] countMembers = new String[] {"18", "16", "2", "91", "72"," 1", "214", "28", "74", "32", "91", "24", "41", "24", "41"};
 
-    private int[] countPosts = new int[] {41, 32, 1, 42, 63, 75, 21, 42, 13, 52};
+    private String[] countPosts = new String[] {"41", "32", "1", "42", "63", "75", "21", "42", "13", "52", "24", "464", "19", "25", "62"};
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
