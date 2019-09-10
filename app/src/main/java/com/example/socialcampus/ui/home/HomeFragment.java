@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,12 +17,31 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.socialcampus.R;
 import com.example.socialcampus.ui.group.GroupFragment;
 
+import java.util.LinkedList;
+
 public class HomeFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
+    public HomeViewModel homeViewModel;
+
+    private final LinkedList<GroupBoxCard> gCardList = new LinkedList<>();
+    private RecyclerView gRecyclerView;
+    private GroupBoxAdapter gAdapter;
+
+    // Hardkode for å vise recycleview (Sindre improve this ofc?)
+    private int[] imgList = new int[]{R.drawable.jan, R.drawable.sindre, R.drawable.kristian,
+                                    R.drawable.jan, R.drawable.sindre, R.drawable.kristian,
+                                    R.drawable.jan, R.drawable.sindre, R.drawable.kristian,
+                                    R.drawable.jan, R.drawable.sindre, R.drawable.kristian,
+                                    R.drawable.jan, R.drawable.sindre, R.drawable.kristian};
+    private String[] description = new String[]{"Tennis", "Fotball", "Bordtennis", "Gaming", "Friluft",
+                                            "Tennis", "Fotball", "Bordtennis", "Gaming", "Friluft",
+                                            "Tennis", "Fotball", "Bordtennis", "Gaming", "Friluft"};
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
@@ -35,6 +55,15 @@ public class HomeFragment extends Fragment {
             }
         });*/
 
+        for (int i = 0; i < 10; i++){
+            gCardList.addLast(new GroupBoxCard(imgList[i], description[i]));
+        }
+
+        gRecyclerView = root.findViewById(R.id.recyclerView_group);
+        gAdapter = new GroupBoxAdapter(getContext(), gCardList);
+        gRecyclerView.setAdapter(gAdapter);
+        gRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+
         return root;
     }
 
@@ -45,13 +74,14 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
-        final CardView card_view = getView().findViewById(R.id.group1);
+        final CardView card_view = getView().findViewById(R.id.group);
         final String LOG_TAG = HomeFragment.class.getSimpleName();
         final PostFragment postFragment = new PostFragment();
 
-        card_view.setOnClickListener(new View.OnClickListener() {
+        //ard_view.setOnClickListener(new View.OnClickListener() {
 
             //String getName = ((TextView)card_view.getChildAt(1)).getText().toString();
+        /*
             @Override
             public void onClick(View v) {
                 Log.d(LOG_TAG, "HomeFragment");
@@ -61,6 +91,8 @@ public class HomeFragment extends Fragment {
                         .commit();
             }
         });
+        */
+
     }
 
 
