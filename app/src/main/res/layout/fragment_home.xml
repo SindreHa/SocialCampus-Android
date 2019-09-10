@@ -7,12 +7,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    >
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Mine Grupper"
+        android:text="Dine Grupper"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"/>
@@ -29,31 +30,39 @@
         </androidx.recyclerview.widget.RecyclerView>
 
 
-    <TextView
+    <com.google.android.material.tabs.TabLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Nye poster"
-        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="8dp"/>
+        android:layout_height="match_parent">
 
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nye" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Topp" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Populære" />
+    </com.google.android.material.tabs.TabLayout>
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/post_scrollView"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="500dp"
         android:scrollbars="vertical">
-       >
 
-        <fragment
-            android:id="@+id/fragment_container"
-            android:name="com.example.socialcampus.ui.home.PostFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:layout="@layout/post_fragment" />
+            <fragment
+                android:id="@+id/fragment_container"
+                android:name="com.example.socialcampus.ui.home.PostFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:layout="@layout/post_fragment" />
 
-    </androidx.core.widget.NestedScrollView>
-
-
+        </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>
