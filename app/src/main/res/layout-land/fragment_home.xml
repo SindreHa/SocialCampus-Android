@@ -6,34 +6,40 @@
     android:id="@+id/fragment_home_id"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     tools:context=".MainActivity"
     >
-
+    <LinearLayout
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textAlignment="center"
         android:text="Dine Grupper"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="8dp"/>
-
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scrollbars="horizontal"
-            android:paddingLeft="2dp"
-            >
+            android:scrollbars="vertical"
+            android:layout_gravity="center"
+            android:paddingLeft="15dp"
+            />
+    </LinearLayout>
 
-        </androidx.recyclerview.widget.RecyclerView>
-
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
     <com.google.android.material.tabs.TabLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
@@ -65,5 +71,7 @@
                 tools:layout="@layout/post_fragment" />
 
         </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
 
 </LinearLayout>

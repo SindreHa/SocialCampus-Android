@@ -14,17 +14,18 @@
         <action
             android:id="@+id/action_nav_home_to_nav_groups"
             app:destination="@id/nav_groups"
-            app:enterAnim="@animator/enter_from_right"
-            app:exitAnim="@animator/exit_to_left"
-            app:popEnterAnim="@animator/enter_from_left"
-            app:popExitAnim="@animator/exit_to_right" />
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
 
     <fragment
         android:id="@+id/nav_about_us"
         android:name="com.example.socialcampus.ui.about_us.AboutUsFragment"
         android:label="@string/menu_about_us"
-        tools:layout="@layout/fragment_about_us" />
+        tools:layout="@layout/fragment_about_us" >
+    </fragment>
 
     <fragment
         android:id="@+id/nav_groups"
@@ -40,7 +41,7 @@
         <action
             android:id="@+id/action_nav_log_in_to_nav_sign_up"
             app:destination="@id/nav_sign_up"
-            app:enterAnim="@animator/enter_from_right"
+            app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@animator/exit_to_left"
             app:popEnterAnim="@animator/enter_from_left"
             app:popExitAnim="@animator/exit_to_right"

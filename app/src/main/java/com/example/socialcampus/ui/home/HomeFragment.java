@@ -1,5 +1,6 @@
 package com.example.socialcampus.ui.home;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Debug;
 import android.text.Layout;
@@ -59,7 +60,13 @@ public class HomeFragment extends Fragment {
         gRecyclerView = root.findViewById(R.id.recyclerView_group);
         gAdapter = new GroupBoxAdapter(getContext(), gCardList, this);
         gRecyclerView.setAdapter(gAdapter);
-        gRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            gRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        } else {
+            gRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        }
+
 
         return root;
     }
