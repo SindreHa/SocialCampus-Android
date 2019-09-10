@@ -10,6 +10,7 @@
     <string name="menu_about_us">Om Oss</string>
     <string name="menu_groups">Grupper</string>
     <string name="menu_log_in">Logg Inn</string>
+    <string name="menu_sign_up">Registrer deg</string>
     <string name="menu_user">Profil</string>
 
     <string-array name="about_us_names">
@@ -24,20 +25,16 @@
         <item>@drawable/kristian</item>
     </array>
 
-    <string name="socialcampus">SocialCampus</string>
+    <!-- Log in and sign up -->
+    <string name="socialcampus">Social Campus</string>
     <string name="socialcampuslogo">Socialcampuslogo</string>
-    <string name="glemt_passord">Glemt passord?</string>
-    <string name="passordL">Passord</string>
-    <string name="har_du_ikke_en_konto">Har du ikke en konto?</string>
-    <string name="brukernavnL">Brukernavn</string>
-    <string name="logg_inn">Logg inn</string>
-    <string name="logg_innR">Logg inn</string>
-    <string name="epost">EPOST</string>
-    <string name="passordR">PASSORD</string>
-    <string name="brukernavnR">BRUKERNAVN</string>
-    <string name="registrer_deg">Registrer deg</string>
-    <string name="lag_ny_konto">Lag ny konto</string>
-    <string name="logg_innbutton">Logg inn</string>
-    <string name="logg_inn_header">Logg inn</string>
+    <string name="forgot_psw">Glemt passord?</string>
+    <string name="password">Passord</string>
+    <string name="no_user">Har du ikke en konto?</string>
+    <string name="username">Brukernavn</string>
+    <string name="log_in">Logg inn</string>
+    <string name="email">E-post</string>
+    <string name="sign_up">Registrer deg</string>
+    <string name="new_acc">Lag ny konto</string>
 
 </resources>

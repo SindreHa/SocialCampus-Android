@@ -25,8 +25,22 @@
         tools:layout="@layout/fragment_group" />
 
     <fragment
-        android:id="@+id/nav_user"
-        android:name="com.example.socialcampus.ui.profile.ProfileFragment"
-        android:label="@string/menu_user"
-        tools:layout="@layout/fragment_profile" />
+        android:id="@+id/nav_log_in"
+        android:name="com.example.socialcampus.ui.LogIn.LogInFragment"
+        android:label="@string/log_in"
+        tools:layout="@layout/fragment_log_in" >
+        <action
+            android:id="@+id/action_nav_log_in_to_nav_sign_up"
+            app:destination="@id/nav_sign_up"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popUpTo="@+id/nav_sign_up" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_sign_up"
+        android:name="com.example.socialcampus.ui.LogIn.SignUpFragment"
+        android:label="@string/menu_sign_up"
+        tools:layout="@layout/fragment_sign_up" />
+
 </navigation>
