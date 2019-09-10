@@ -60,38 +60,16 @@ public class HomeFragment extends Fragment {
         }
 
         gRecyclerView = root.findViewById(R.id.recyclerView_group);
-        gAdapter = new GroupBoxAdapter(getContext(), gCardList);
+        gAdapter = new GroupBoxAdapter(getContext(), gCardList, this);
         gRecyclerView.setAdapter(gAdapter);
         gRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
         return root;
     }
 
-    private void displayToast(String t) {
-        Toast.makeText(getContext(), t, Toast.LENGTH_LONG).show();
-    }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-
-        final CardView card_view = getView().findViewById(R.id.group);
-        final String LOG_TAG = HomeFragment.class.getSimpleName();
-        final PostFragment postFragment = new PostFragment();
-
-        //ard_view.setOnClickListener(new View.OnClickListener() {
-
-            //String getName = ((TextView)card_view.getChildAt(1)).getText().toString();
-        /*
-            @Override
-            public void onClick(View v) {
-                Log.d(LOG_TAG, "HomeFragment");
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(((ViewGroup)getView().getParent()).getId(), postFragment, "findThisFragment")
-                        .addToBackStack(null)
-                        .commit();
-            }
-        });
-        */
 
     }
 

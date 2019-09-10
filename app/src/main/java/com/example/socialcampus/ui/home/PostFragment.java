@@ -53,24 +53,6 @@ public class PostFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
-        final CardView card_view = getView().findViewById(R.id.cardView);
-        final String LOG_TAG = HomeFragment.class.getSimpleName();
-        final GroupFragment groupFragment = new GroupFragment();
-
-        card_view.setOnClickListener(new View.OnClickListener() {
-
-            //String getName = ((TextView)card_view.getChildAt(1)).getText().toString();
-            @Override
-            public void onClick(View v) {
-                Log.d(LOG_TAG, "postFragment");
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(((ViewGroup)getView().getParent()).getId(), groupFragment, "findThisFragment")
-                        .addToBackStack(null)
-                        .commit();
-            }
-        });
-
-
     }
 
 }
