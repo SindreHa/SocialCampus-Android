@@ -2,7 +2,7 @@
     android:id="@+id/groupCard"
     android:layout_width="160dp"
     android:layout_height="200dp"
-    app:cardBackgroundColor="@color/colorPrimaryDark"
+    app:cardBackgroundColor="@color/colorCardBackground"
     app:cardCornerRadius="@dimen/card_radius"
     android:layout_marginRight="@dimen/vertical_card_margin_horizontal"
     android:layout_marginLeft="@dimen/vertical_card_margin_horizontal"
@@ -44,8 +44,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Tennis"
-                android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                android:textColor="@android:color/white"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:textColor="@color/textWhitePrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -63,13 +63,16 @@
                     android:id="@+id/group_card_members"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_groups" />
+                    android:src="@drawable/ic_groups"
+                    app:tint="@color/textWhiteSecondary"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/group_card_num_members"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
+                    android:textColor="@color/textWhiteSecondary"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                     app:layout_constraintBottom_toBottomOf="@+id/group_card_members"
                     app:layout_constraintLeft_toRightOf="@+id/group_card_members"
                     app:layout_constraintTop_toTopOf="@id/group_card_members" />
@@ -79,13 +82,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
-                    android:src="@drawable/ic_post" />
+                    android:src="@drawable/ic_post"
+                    app:tint="@color/textWhiteSecondary"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/group_card_num_posts"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                    android:textColor="@color/textWhiteSecondary"
                     app:layout_constraintBottom_toBottomOf="@+id/group_card_members"
                     app:layout_constraintLeft_toRightOf="@+id/group_card_members"
                     app:layout_constraintTop_toTopOf="@id/group_card_members" />
