@@ -15,9 +15,9 @@
             android:id="@+id/action_nav_home_to_nav_groups"
             app:destination="@id/nav_groups"
             app:enterAnim="@animator/enter_from_right"
-            app:exitAnim="@animator/enter_from_left"
+            app:exitAnim="@animator/exit_to_left"
             app:popEnterAnim="@animator/enter_from_left"
-            app:popExitAnim="@animator/enter_from_right" />
+            app:popExitAnim="@animator/exit_to_right" />
     </fragment>
 
     <fragment
@@ -40,8 +40,10 @@
         <action
             android:id="@+id/action_nav_log_in_to_nav_sign_up"
             app:destination="@id/nav_sign_up"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
+            app:enterAnim="@animator/enter_from_right"
+            app:exitAnim="@animator/exit_to_left"
+            app:popEnterAnim="@animator/enter_from_left"
+            app:popExitAnim="@animator/exit_to_right"
             app:popUpTo="@+id/nav_sign_up" />
     </fragment>
 

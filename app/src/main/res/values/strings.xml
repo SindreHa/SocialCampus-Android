@@ -10,7 +10,7 @@
     <string name="menu_about_us">Om Oss</string>
     <string name="menu_groups">Grupper</string>
     <string name="menu_log_in">Logg Inn</string>
-    <string name="menu_sign_up">Logg Inn</string>
+    <string name="menu_sign_up">Registrer deg</string>
     <string name="menu_user">Profil</string>
 
     <array name="about_us_pictures">

@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="40dp"
-    android:layout_marginRight="40dp">
+    android:paddingLeft="40dp"
+    android:paddingRight="40dp">
 
     <ImageView
         android:id="@+id/sclogo"
@@ -95,8 +95,4 @@
         </LinearLayout>
 
     </LinearLayout>
-
-
-
-
 </RelativeLayout>
