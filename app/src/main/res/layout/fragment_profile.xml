@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/socialcampus"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:layout_marginRight="20dp"
         android:text="@string/logg_inn_header"
         android:textColor="#FFFFFF"
@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/header"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:layout_marginRight="20dp"
         android:orientation="vertical">
 
@@ -100,7 +100,7 @@
             android:layout_marginTop="50dp"
             android:background="@drawable/round"
             android:gravity="center"
-            android:padding="14dp"
+            android:padding="9dp"
             android:text="@string/logg_innbutton"
             android:textColor="#CBD1DC"
             android:textStyle="bold" />
