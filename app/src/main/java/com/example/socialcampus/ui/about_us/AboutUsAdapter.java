@@ -35,6 +35,8 @@ public class AboutUsAdapter extends RecyclerView.Adapter<AboutUsAdapter.ViewHold
     @Override
     public void onBindViewHolder(AboutUsAdapter.ViewHolder holder, int position) {
         AboutUscard currentPerson = mAboutUsData.get(position);
+        holder.mNavn.setText("heu");
+        holder.mBilde.setImageResource(R.drawable.fotball);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -45,12 +47,12 @@ public class AboutUsAdapter extends RecyclerView.Adapter<AboutUsAdapter.ViewHold
             super(itemView);
 
             mNavn = itemView.findViewById(R.id.about_us_name);
-            mProfilePhoto = itemView.findViewById(R.id.about_us_picture);
+            mBilde = itemView.findViewById(R.id.about_us_picture);
         }
 
         void bindTo(int position) {
-            mNavn.setText(AboutUscard.aNavn[position]);
-            mProfilePhoto.setImageResource(AboutUscard.aBilder[position]);
+            //mNavn.setText(AboutUscard.aNavn[position]);
+            //mProfilePhoto.setImageResource(AboutUscard.aBilder[position]);
            // Glide.with(mContext).load(currentPerson.getBilde()).into(mProfilePhoto);
         }
     }
