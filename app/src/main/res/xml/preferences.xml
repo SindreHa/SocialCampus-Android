@@ -1,0 +1,41 @@
+<PreferenceScreen
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        app:title="Generelt">
+    <Preference
+        app:key="tilbakemelding"
+        app:icon="@drawable/ic_feedback"
+        app:title="Send tilbakemelding"
+        app:summary="Rapporter problemer"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:title="Notifikasjoner">
+        <SwitchPreferenceCompat
+            app:icon="@drawable/ic_notification"
+            app:key="notifications"
+            app:title="Notifikasjoner"/>
+        <SwitchPreferenceCompat
+            app:icon="@drawable/ic_vibrate"
+            app:key="vibrate"
+            app:title="Vibrering"/>
+        <MultiSelectListPreference
+            app:icon="@drawable/ic_sound"
+            app:key="notification_sound"
+            app:title="Notifikasjonslyd"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:title="Info">
+        <Preference
+            app:icon="@drawable/ic_about"
+            app:title="Opphavrettsinformasjon"
+            app:summary="SocialCampus © 2019"/>
+        <Preference
+            app:icon="@drawable/ic_about"
+            app:title="App versjon"
+            app:summary="1.2"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>

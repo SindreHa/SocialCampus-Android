@@ -41,7 +41,7 @@
         <action
             android:id="@+id/action_nav_log_in_to_nav_sign_up"
             app:destination="@id/nav_sign_up"
-            app:enterAnim="@android:anim/slide_in_left"
+            app:enterAnim="@animator/enter_from_right"
             app:exitAnim="@animator/exit_to_left"
             app:popEnterAnim="@animator/enter_from_left"
             app:popExitAnim="@animator/exit_to_right"
@@ -53,5 +53,11 @@
         android:name="com.example.socialcampus.ui.LogIn.SignUpFragment"
         android:label="@string/menu_sign_up"
         tools:layout="@layout/fragment_sign_up" />
+
+    <fragment
+        android:id="@+id/nav_preferences"
+        android:name="com.example.socialcampus.ui.settings.fragment_settings"
+        android:label="Instillinger"
+        tools:layout="@layout/fragment_settings" />
 
 </navigation>
