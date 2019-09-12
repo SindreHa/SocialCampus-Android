@@ -1,5 +1,5 @@
-<PreferenceScreen
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
         app:title="Generelt">
@@ -20,10 +20,16 @@
             app:icon="@drawable/ic_vibrate"
             app:key="vibrate"
             app:title="Vibrering"/>
-        <MultiSelectListPreference
-            app:icon="@drawable/ic_sound"
-            app:key="notification_sound"
-            app:title="Notifikasjonslyd"/>
+        <CheckBoxPreference
+            app:icon="@drawable/ic_post"
+            app:key="post_notification"
+            app:title="Kommentarer"
+            android:summary="Få varsling om nye kommentarer på en av postene dine"/>
+        <CheckBoxPreference
+            app:icon="@drawable/ic_like"
+            app:key="like_notification"
+            app:title="Likes"
+            android:summary="Få varsling om nye likes på en av postene eller kommentarene dine"/>
     </PreferenceCategory>
 
     <PreferenceCategory
