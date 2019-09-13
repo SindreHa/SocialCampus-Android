@@ -27,7 +27,7 @@ public class GroupFragment extends Fragment {
         postCardList.add(new PostCard(getString(R.string.socialcampus), getString(R.string.username), getString(R.string.placeholder_text)));
 
         postRecyclerView = root.findViewById(R.id.group_post_recycler);
-        postAdapter = new PostListAdapter(getContext(), postCardList, this);
+        postAdapter = new PostListAdapter(getContext(), postCardList);
         postRecyclerView.setAdapter(postAdapter);
         postRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         return root;

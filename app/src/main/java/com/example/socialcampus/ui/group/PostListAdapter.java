@@ -19,7 +19,7 @@ public class PostListAdapter extends RecyclerView.Adapter<com.example.socialcamp
     private LayoutInflater inflater;
     private GroupFragment groupFragment;
 
-    public PostListAdapter(Context context, LinkedList<PostCard> postCardList, GroupFragment groupFragment){
+    public PostListAdapter(Context context, LinkedList<PostCard> postCardList){
         inflater = LayoutInflater.from(context);
         this.postCardList = postCardList;
         this.groupFragment = groupFragment;

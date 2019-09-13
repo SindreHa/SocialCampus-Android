@@ -51,19 +51,10 @@
             android:text="Populære" />
     </com.google.android.material.tabs.TabLayout>
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/post_scrollView"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/group_post_recycler_home"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="vertical">
-
-            <fragment
-                android:id="@+id/fragment_container"
-                android:name="com.example.socialcampus.ui.home.PostFragment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:layout="@layout/post_fragment" />
-
-        </androidx.core.widget.NestedScrollView>
+        android:scrollbars="vertical"/>
 
 </LinearLayout>

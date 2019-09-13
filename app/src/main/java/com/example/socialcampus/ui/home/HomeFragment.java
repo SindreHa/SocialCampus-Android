@@ -12,6 +12,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.socialcampus.R;
+import com.example.socialcampus.ui.group.PostCard;
+import com.example.socialcampus.ui.group.PostListAdapter;
+
 import java.util.LinkedList;
 
 public class HomeFragment extends Fragment {
@@ -19,6 +22,9 @@ public class HomeFragment extends Fragment {
     private final LinkedList<GroupBoxCard> gCardList = new LinkedList<>();
     private RecyclerView gRecyclerView;
     private GroupBoxAdapter gAdapter;
+    private final LinkedList<PostCard> postCardList = new LinkedList<>();
+    private RecyclerView postRecyclerView;
+    private PostListAdapter postAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -53,6 +59,14 @@ public class HomeFragment extends Fragment {
         } else {
             gRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         }
+        for (int i=0; i<10; i++) {
+            postCardList.add(new PostCard(getString(R.string.socialcampus), getString(R.string.username), getString(R.string.placeholder_text)));
+        }
+        postRecyclerView = root.findViewById(R.id.group_post_recycler_home);
+        postAdapter = new PostListAdapter(getContext(), postCardList);
+        postRecyclerView.setAdapter(postAdapter);
+        postRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+
         return root;
     }
 
