@@ -1,7 +1,7 @@
 <androidx.cardview.widget.CardView
     android:id="@+id/groupCard"
-    android:layout_width="160dp"
-    android:layout_height="200dp"
+    android:layout_width="170dp"
+    android:layout_height="220dp"
     app:cardBackgroundColor="@color/colorCardBackground"
     app:cardCornerRadius="@dimen/card_radius"
     android:layout_marginRight="@dimen/vertical_card_margin_horizontal"
@@ -24,14 +24,14 @@
         <ImageView
             android:id="@+id/group_card_img"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="130dp"
             android:scaleType="centerCrop"
             android:src="@drawable/tennis"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="90dp"
             android:paddingTop="@dimen/group_card_info_padding_vertical"
             android:paddingBottom="@dimen/group_card_info_padding_vertical"
             android:paddingRight="@dimen/group_card_info_padding_horizontal"

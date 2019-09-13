@@ -16,6 +16,6 @@
 
     <!-- Group card home -->
     <dimen name="group_card_info_padding_horizontal">12dp</dimen>
-    <dimen name="group_card_info_padding_vertical">6dp</dimen>
+    <dimen name="group_card_info_padding_vertical">4dp</dimen>
     <dimen name="group_card_info_padding">8dp</dimen>
 </resources>
