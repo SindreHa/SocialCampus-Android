@@ -7,7 +7,7 @@
         app:key="tilbakemelding"
         app:icon="@drawable/ic_feedback"
         app:title="Send tilbakemelding"
-        app:summary="Rapporter problemer"/>
+        app:summary="Vi ønsker å vite hva du liker og ikke"/>
     </PreferenceCategory>
 
     <PreferenceCategory

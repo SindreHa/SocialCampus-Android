@@ -7,19 +7,29 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.socialcampus.R;
+import com.example.socialcampus.ui.group.PostListAdapter;
+
+import java.util.LinkedList;
 
 public class GroupFragment extends Fragment {
 
-    private GroupViewModel slideshowViewModel;
+    private final LinkedList<PostCard> postCardList = new LinkedList<>();
+    private RecyclerView postRecyclerView;
+    private PostListAdapter postAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View root = inflater.inflate(R.layout.fragment_group, container, false);
 
-        slideshowViewModel = ViewModelProviders.of(this).get(GroupViewModel.class);
+        postCardList.add(new PostCard(getString(R.string.socialcampus), getString(R.string.username), getString(R.string.placeholder_text)));
 
-        View root = inflater.inflate(R.layout.fragment_comment, container, false);
-
+        postRecyclerView = root.findViewById(R.id.group_post_recycler);
+        postAdapter = new PostListAdapter(getContext(), postCardList, this);
+        postRecyclerView.setAdapter(postAdapter);
+        postRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         return root;
     }
 

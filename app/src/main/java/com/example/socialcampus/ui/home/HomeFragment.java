@@ -2,33 +2,18 @@ package com.example.socialcampus.ui.home;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.os.Debug;
-import android.text.Layout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.socialcampus.R;
-import com.example.socialcampus.ui.group.GroupFragment;
-
 import java.util.LinkedList;
 
 public class HomeFragment extends Fragment {
-
-    public HomeViewModel homeViewModel;
 
     private final LinkedList<GroupBoxCard> gCardList = new LinkedList<>();
     private RecyclerView gRecyclerView;
@@ -66,8 +51,6 @@ public class HomeFragment extends Fragment {
         } else {
             gRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         }
-
-
         return root;
     }
 
