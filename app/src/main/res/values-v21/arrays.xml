@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="group_title">
+        <item>Tennis</item>
+        <item>Fotball</item>
+        <item>Bordtennis</item>
+        <item>Gaming</item>
+        <item>Friluft</item>
+        <item>Tennis</item>
+        <item>Fotball</item>
+        <item>Bordtennis</item>
+        <item>Gaming</item>
+        <item>Friluft</item>
+        <item>Tennis</item>
+        <item>Fotball</item>
+        <item>Bordtennis</item>
+        <item>Gaming</item>
+        <item>Friluft</item>
+    </string-array>
+
+    <string-array name="group_member_count">
+        <item>18</item>
+        <item>41</item>
+        <item>23</item>
+        <item>52</item>
+        <item>63</item>
+        <item>54</item>
+        <item>124</item>
+        <item>53</item>
+        <item>32</item>
+        <item>1</item>
+        <item>53</item>
+        <item>45</item>
+        <item>36</item>
+        <item>74</item>
+        <item>27</item>
+    </string-array>
+
+    <string-array name="group_post_count">
+        <item>41</item>
+        <item>2</item>
+        <item>5</item>
+        <item>64</item>
+        <item>26</item>
+        <item>74</item>
+        <item>722</item>
+        <item>23</item>
+        <item>432</item>
+        <item>112</item>
+        <item>53</item>
+        <item>32</item>
+        <item>73</item>
+        <item>65</item>
+        <item>72</item>
+    </string-array>
+
+    <integer-array name="group_pictures">
+        <item>@drawable/tennis</item>
+        <item>@drawable/fotball</item>
+        <item>@drawable/bordtennis</item>
+        <item>@drawable/gaming</item>
+        <item>@drawable/friluft</item>
+        <item>@drawable/tennis</item>
+        <item>@drawable/fotball</item>
+        <item>@drawable/bordtennis</item>
+        <item>@drawable/gaming</item>
+        <item>@drawable/friluft</item>
+        <item>@drawable/tennis</item>
+        <item>@drawable/fotball</item>
+        <item>@drawable/bordtennis</item>
+        <item>@drawable/gaming</item>
+        <item>@drawable/friluft</item>
+    </integer-array>
+</resources>

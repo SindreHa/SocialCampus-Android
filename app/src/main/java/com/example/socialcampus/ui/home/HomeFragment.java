@@ -1,6 +1,7 @@
 package com.example.socialcampus.ui.home;
 
 import android.content.res.Configuration;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,27 +20,28 @@ public class HomeFragment extends Fragment {
     private RecyclerView gRecyclerView;
     private GroupBoxAdapter gAdapter;
 
-    // Hardkode for å vise recycleview (Sindre improve this ofc?)
-    private int[] imgList = new int[]{R.drawable.tennis, R.drawable.fotball, R.drawable.bordtennis,
-                                    R.drawable.gaming, R.drawable.friluft, R.drawable.tennis,
-                                    R.drawable.fotball, R.drawable.bordtennis, R.drawable.gaming,
-                                    R.drawable.friluft, R.drawable.tennis, R.drawable.fotball,
-                                    R.drawable.bordtennis, R.drawable.gaming, R.drawable.friluft};
-
-    private String[] description = new String[]{"Tennis", "Fotball", "Bordtennis", "Gaming", "Friluft",
-                                            "Tennis", "Fotball", "Bordtennis", "Gaming", "Friluft",
-                                            "Tennis", "Fotball", "Bordtennis", "Gaming", "Friluft"};
-
-    private String[] countMembers = new String[] {"18", "16", "2", "91", "72"," 1", "214", "28", "74", "32", "91", "24", "41", "24", "41"};
-
-    private String[] countPosts = new String[] {"41", "32", "1", "42", "63", "75", "21", "42", "13", "52", "24", "464", "19", "25", "62"};
-
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
+        //https://stackoverflow.com/questions/29819204/could-android-store-drawable-ids-like-an-integer-array
+        TypedArray tArray = getResources().obtainTypedArray(
+                R.array.group_pictures);
+        int count = tArray.length();
+        int[] ids = new int[count];
+        for (int i = 0; i < ids.length; i++) {
+            ids[i] = tArray.getResourceId(i, 0);
+        }
+        tArray.recycle();
+
+
+        int[] gruppeBilder = ids;
+        String[] gruppeTittel = getResources().getStringArray(R.array.group_title);
+        String[] gruppeAntMeldemmer = getResources().getStringArray(R.array.group_member_count);
+        String[] gruppeAntPoster = getResources().getStringArray(R.array.group_post_count);
+
         for (int i = 0; i < 10; i++){
-            gCardList.addLast(new GroupBoxCard(imgList[i], description[i], countMembers[i], countPosts[i]));
+            gCardList.addLast(new GroupBoxCard(gruppeBilder[i], gruppeTittel[i], gruppeAntMeldemmer[i], gruppeAntPoster[i]));
         }
 
         gRecyclerView = root.findViewById(R.id.recyclerView_group);
