@@ -45,7 +45,7 @@ public class HomeFragment extends Fragment {
         }
 
         gRecyclerView = root.findViewById(R.id.recyclerView_group);
-        gAdapter = new GroupBoxAdapter(getContext(), gCardList, this);
+        gAdapter = new GroupBoxAdapter(getContext(), gCardList);
         gRecyclerView.setAdapter(gAdapter);
         int orientation = getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -61,6 +61,5 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
     }
-
 
 }

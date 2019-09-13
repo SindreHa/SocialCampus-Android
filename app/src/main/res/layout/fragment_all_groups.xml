@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical">
+        <RelativeLayout
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ui.all_groups.AllGroups">
+
+            <TextView
+                android:id="@+id/all_groups_title_all"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/all_groups_all"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="8dp"/>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_below="@id/all_groups_title_all"
+                android:id="@+id/all_groups_recycler_all"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="horizontal"
+                android:paddingLeft="2dp"
+                />
+
+            <TextView
+                android:layout_below="@id/all_groups_recycler_all"
+                android:id="@+id/all_groups_title_uteliv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/all_groups_uteliv"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="8dp"/>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_below="@id/all_groups_title_uteliv"
+                android:id="@+id/all_groups_recycler_uteliv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="horizontal"
+                android:paddingLeft="2dp"
+                />
+
+            <TextView
+                android:layout_below="@id/all_groups_recycler_uteliv"
+                android:id="@+id/all_groups_title_sport"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/all_groups_sport"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="8dp"/>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_below="@id/all_groups_title_sport"
+                android:id="@+id/all_groups_recycler_sport"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="horizontal"
+                android:paddingLeft="2dp"
+                />
+
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

@@ -21,10 +21,9 @@ public class GroupBoxAdapter extends RecyclerView.Adapter<GroupBoxAdapter.GroupB
     private LayoutInflater inflater;
     private HomeFragment homeFragment;
 
-    public GroupBoxAdapter(Context context, LinkedList<GroupBoxCard> boxCardList, HomeFragment homeFragment){
+    public GroupBoxAdapter(Context context, LinkedList<GroupBoxCard> boxCardList){
         inflater = LayoutInflater.from(context);
         this.boxCardList = boxCardList;
-        this.homeFragment = homeFragment;
     }
 
     @NonNull

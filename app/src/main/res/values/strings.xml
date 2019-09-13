@@ -9,9 +9,15 @@
     <string name="menu_home">Hjem</string>
     <string name="menu_about_us">Om Oss</string>
     <string name="menu_groups">Grupper</string>
+    <string name="menu_all_groups">Alle grupper</string>
     <string name="menu_log_in">Logg Inn</string>
     <string name="menu_sign_up">Registrer deg</string>
     <string name="menu_user">Profil</string>
+
+    <!-- Headlines -->
+    <string name="all_groups_all">Alle grupper</string>
+    <string name="all_groups_sport">Sport</string>
+    <string name="all_groups_uteliv">Uteliv</string>
 
     <array name="about_us_pictures">
         <item>@drawable/sindre</item>
