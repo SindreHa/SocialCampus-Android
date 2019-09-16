@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -45,7 +47,9 @@ public class HomeFragment extends Fragment {
         postRecyclerView.setAdapter(postAdapter);
         postRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
+
         initializeData();
+
         return root;
     }
 
@@ -66,10 +70,12 @@ public class HomeFragment extends Fragment {
         String[] gruppeAntMeldemmer = getResources().getStringArray(R.array.group_member_count);
         String[] gruppeAntPoster = getResources().getStringArray(R.array.group_post_count);
 
+        gCardList.clear();
         for (int i = 0; i < 10; i++){
             gCardList.addLast(new GroupBoxCard(gruppeBilder[i], gruppeTittel[i], gruppeAntMeldemmer[i], gruppeAntPoster[i]));
         }
 
+        postCardList.clear();
         for (int i=0; i<10; i++) {
             postCardList.add(new PostCard(getString(R.string.socialcampus), getString(R.string.username), getString(R.string.placeholder_text)));
         }
