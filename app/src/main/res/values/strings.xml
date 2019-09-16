@@ -19,17 +19,7 @@
     <string name="all_groups_sport">Sport</string>
     <string name="all_groups_uteliv">Uteliv</string>
 
-    <array name="about_us_pictures">
-        <item>@drawable/sindre</item>
-        <item>@drawable/jan</item>
-        <item>@drawable/kristian</item>
-    </array>
 
-    <array name="about_us_names">
-        <item>Sindre Haavaldsen</item>
-        <item>Jan Andreas</item>
-        <item>Kristian</item>
-    </array>
 
     <!-- Log in and sign up -->
     <string name="socialcampus">Social Campus</string>

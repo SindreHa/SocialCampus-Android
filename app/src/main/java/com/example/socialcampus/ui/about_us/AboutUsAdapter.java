@@ -9,56 +9,58 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.bumptech.glide.Glide;
 import com.example.socialcampus.R;
+import java.util.LinkedList;
 
-import java.util.ArrayList;
+public class AboutUsAdapter extends RecyclerView.Adapter<AboutUsAdapter.AboutUsHolder>{
 
-public class AboutUsAdapter extends RecyclerView.Adapter<AboutUsAdapter.ViewHolder> {
+    private final LinkedList<AboutUscard> aboutUsList;
+    private LayoutInflater inflater;
 
-    private ArrayList<AboutUscard> mAboutUsData;
-    private Context mContext;
-    private ImageView mProfilePhoto;
-
-    AboutUsAdapter(Context context, ArrayList<AboutUscard> AboutUsData) {
-        this.mAboutUsData = AboutUsData;
-        this.mContext = context;
+    public AboutUsAdapter(Context context, LinkedList<AboutUscard> aboutUsList){
+        inflater = LayoutInflater.from(context);
+        this.aboutUsList = aboutUsList;
     }
 
     @NonNull
     @Override
-    public AboutUsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(mContext).inflate(R.layout.about_us_card, parent, false));
+    public AboutUsAdapter.AboutUsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View itemView = inflater.inflate(R.layout.about_us_card, parent, false);
+        return new AboutUsHolder(itemView,this);
     }
 
     @Override
-    public void onBindViewHolder(AboutUsAdapter.ViewHolder holder, int position) {
-        AboutUscard currentPerson = mAboutUsData.get(position);
-        holder.mNavn.setText("heu");
-        holder.mBilde.setImageResource(R.drawable.fotball);
-    }
-
-    class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView mNavn;
-        private ImageView mBilde;
-
-        ViewHolder(View itemView) {
-            super(itemView);
-
-            mNavn = itemView.findViewById(R.id.about_us_name);
-            mBilde = itemView.findViewById(R.id.about_us_picture);
-        }
-
-        void bindTo(int position) {
-            //mNavn.setText(AboutUscard.aNavn[position]);
-            //mProfilePhoto.setImageResource(AboutUscard.aBilder[position]);
-           // Glide.with(mContext).load(currentPerson.getBilde()).into(mProfilePhoto);
-        }
+    public void onBindViewHolder(@NonNull AboutUsAdapter.AboutUsHolder holder, int position) {
+        holder.aboutUsImg.setImageResource(aboutUsList.get(position).getBilde());
+        holder.aboutUsTitle.setText(aboutUsList.get(position).getAboutUsTitle());
+        holder.aboutUsRole.setText(aboutUsList.get(position).getAboutUsRole());
+        holder.aboutUsDescription.setText(aboutUsList.get(position).getAboutUsDescription());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return aboutUsList.size();
+    }
+
+    class AboutUsHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        public final ImageView aboutUsImg;
+        public final TextView aboutUsTitle;
+        public final TextView aboutUsRole;
+        public final TextView aboutUsDescription;
+        final AboutUsAdapter adapter;
+
+        public AboutUsHolder(View itemView, AboutUsAdapter adapter){
+            super(itemView);
+            this.aboutUsImg = itemView.findViewById(R.id.about_us_picture);
+            this.aboutUsTitle = itemView.findViewById(R.id.about_us_title);
+            this.aboutUsRole = itemView.findViewById(R.id.about_us_role);
+            this.aboutUsDescription = itemView.findViewById(R.id.about_us_description);
+            this.adapter = adapter;
+            //itemView.setOnClickListener(itemView.findViewById(R.id.about_us_description).setVisibility(View.VISIBLE));
+        }
+
+        @Override
+        public void onClick(View view) {
+        }
     }
 }

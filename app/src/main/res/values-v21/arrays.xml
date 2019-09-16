@@ -71,4 +71,22 @@
         <item>@drawable/gaming</item>
         <item>@drawable/friluft</item>
     </integer-array>
+
+    <integer-array name="about_us_pictures">
+        <item>@drawable/sindre</item>
+        <item>@drawable/jan</item>
+        <item>@drawable/kristian</item>
+    </integer-array>
+
+    <string-array name="about_us_names">
+        <item>Sindre Haavaldsen</item>
+        <item>Jan Andreas</item>
+        <item>Kristian</item>
+    </string-array>
+
+    <string-array name="about_us_roles">
+        <item>Utvikler</item>
+        <item>Noe</item>
+        <item>Noe annet</item>
+    </string-array>
 </resources>

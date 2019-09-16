@@ -18,11 +18,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.socialcampus.R;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class AboutUsFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
-    private ArrayList<AboutUscard> mAboutUsData;
+    private final LinkedList<AboutUscard> mAboutUsData = new LinkedList<>();
     private AboutUsAdapter mAdapter;
     private View mView;
 
@@ -32,12 +33,10 @@ public class AboutUsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_about_us, container, false);
 
-        mRecyclerView = (RecyclerView) root.findViewById(R.id.about_us_recycler);
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this.getActivity());
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mAboutUsData = new ArrayList<>();
+        mRecyclerView = root.findViewById(R.id.about_us_recycler);
         mAdapter = new AboutUsAdapter(getContext(), mAboutUsData);
         mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
         initializeData();
 
@@ -51,18 +50,24 @@ public class AboutUsFragment extends Fragment {
     }
 
     private void initializeData() {
-        String[] names = getResources().getStringArray(R.array.about_us_names);
-        TypedArray pictures = getResources().obtainTypedArray(R.array.about_us_pictures);
 
-        int length = names.length;
-        Log.d(LOG_CAT, "Init " + length);
-
-
-        for (int i=0;i<names.length;i++) {
-            mAboutUsData.add(new AboutUscard());
+        //https://stackoverflow.com/questions/29819204/could-android-store-drawable-ids-like-an-integer-array
+        TypedArray tArray = getResources().obtainTypedArray(
+                R.array.about_us_pictures);
+        int count = tArray.length();
+        int[] ids = new int[count];
+        for (int i = 0; i < ids.length; i++) {
+            ids[i] = tArray.getResourceId(i, 0);
         }
+        tArray.recycle();
 
-        pictures.recycle();
-        mAdapter.notifyDataSetChanged();
+        int[] aboutUsPicture = ids;
+        String[] aboutUsTitle = getResources().getStringArray(R.array.about_us_names);
+        String[] aboutUsRole = getResources().getStringArray(R.array.about_us_roles);
+        String aboutUsDescription = getResources().getString(R.string.placeholder_text);
+
+        for (int i = 0; i < 3; i++){
+            mAboutUsData.addLast(new AboutUscard(aboutUsPicture[i], aboutUsTitle[i], aboutUsRole[0], aboutUsDescription));
+        }
     }
 }
