@@ -30,6 +30,27 @@ public class HomeFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
+        gRecyclerView = root.findViewById(R.id.recyclerView_group);
+        gAdapter = new GroupBoxAdapter(getContext(), gCardList);
+        gRecyclerView.setAdapter(gAdapter);
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            gRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        } else {
+            gRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        }
+
+        postRecyclerView = root.findViewById(R.id.group_post_recycler_home);
+        postAdapter = new PostListAdapter(getContext(), postCardList);
+        postRecyclerView.setAdapter(postAdapter);
+        postRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+
+        initializeData();
+        return root;
+    }
+
+    private void initializeData() {
+
         //https://stackoverflow.com/questions/29819204/could-android-store-drawable-ids-like-an-integer-array
         TypedArray tArray = getResources().obtainTypedArray(
                 R.array.group_pictures);
@@ -40,7 +61,6 @@ public class HomeFragment extends Fragment {
         }
         tArray.recycle();
 
-
         int[] gruppeBilder = ids;
         String[] gruppeTittel = getResources().getStringArray(R.array.group_title);
         String[] gruppeAntMeldemmer = getResources().getStringArray(R.array.group_member_count);
@@ -50,24 +70,12 @@ public class HomeFragment extends Fragment {
             gCardList.addLast(new GroupBoxCard(gruppeBilder[i], gruppeTittel[i], gruppeAntMeldemmer[i], gruppeAntPoster[i]));
         }
 
-        gRecyclerView = root.findViewById(R.id.recyclerView_group);
-        gAdapter = new GroupBoxAdapter(getContext(), gCardList);
-        gRecyclerView.setAdapter(gAdapter);
-        int orientation = getResources().getConfiguration().orientation;
-        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            gRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        } else {
-            gRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        }
         for (int i=0; i<10; i++) {
             postCardList.add(new PostCard(getString(R.string.socialcampus), getString(R.string.username), getString(R.string.placeholder_text)));
         }
-        postRecyclerView = root.findViewById(R.id.group_post_recycler_home);
-        postAdapter = new PostListAdapter(getContext(), postCardList);
-        postRecyclerView.setAdapter(postAdapter);
-        postRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
-        return root;
+        gAdapter.notifyDataSetChanged();
+        postAdapter.notifyDataSetChanged();
     }
 
 
