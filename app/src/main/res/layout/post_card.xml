@@ -12,57 +12,140 @@
     android:foreground="?android:selectableItemBackground"
     android:clickable="true">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/card_post_layout"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp">
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp">
 
-        <TextView
-            android:id="@+id/card_post_title"
+        <LinearLayout
+            android:id="@+id/card_post_title_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/card_post_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="32dp"
+                android:text="Tittel"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:textColor="@color/textWhitePrimary" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/card_post_username_group_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:fontFamily="sans-serif-medium"
-            android:paddingTop="0dp"
-            android:paddingBottom="0dp"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-            android:textColor="@color/textWhitePrimary"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/card_post_author"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_below="@id/card_post_title_info"
+            android:layout_marginStart="16dp">
+            <TextView
+                android:id="@+id/card_post_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Brukernavn"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                android:textSize="14dp"
+                android:textColor="@color/colorAccent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/card_post_title" />
 
-        <TextView
-            android:id="@+id/card_post_author"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:fontFamily="sans-serif-medium"
-            android:paddingRight="8dp"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-            android:textColor="@color/colorAccent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/card_post_title" />
+            <TextView
+                android:id="@+id/card_post_in"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="i"
+                android:textSize="14dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                android:textColor="@color/textWhiteSecondary" />
+
+            <TextView
+                android:id="@+id/card_post_group_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="32dp"
+                android:layout_marginStart="4dp"
+                android:text="Gruppenavn"
+                android:textSize="14dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                android:textColor="@color/colorAccent" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/card_post_description"
             style="@style/TextAppearance.AppCompat.Subhead"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="32dp"
-            android:layout_marginBottom="8dp"
-            android:paddingTop="4dp"
+            android:paddingTop="6dp"
+            android:text="@string/placeholder_text"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
             android:textColor="@color/textWhitePrimary"
             android:textSize="14sp"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/card_post_author" />
+            android:layout_below="@id/card_post_username_group_info"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/card_post_stats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/card_post_description"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp">
+            <TextView
+                android:id="@+id/card_post_comment_stat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="12 Kommentarer"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                android:textSize="12dp"
+                android:textColor="@color/textWhiteSecondary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/card_post_title" />
+
+            <TextView
+                android:id="@+id/card_post_stats_dot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="•"
+                android:textSize="12dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                android:textColor="@color/textWhiteSecondary" />
+
+            <TextView
+                android:id="@+id/card_post_likes_stat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="16 liker"
+                android:textSize="12dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                android:textColor="@color/textWhiteSecondary" />
+
+            <TextView
+                android:id="@+id/card_post_stats_dot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="•"
+                android:textSize="12dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                android:textColor="@color/textWhiteSecondary" />
+
+            <TextView
+                android:id="@+id/card_post_timestamp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="16:23:12"
+                android:textSize="12dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                android:textColor="@color/textWhiteSecondary" />
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

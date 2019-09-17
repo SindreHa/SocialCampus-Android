@@ -37,7 +37,12 @@
         Lorem ipsum dolor sit amet, consectetur adipiscing elit,
         sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-        nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-        reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</string>
+        nisi ut aliquip ex ea commodo consequat.</string>
+    <string name="placeholder_title">
+        Duis aute irure dolor</string>
+    <string name="placeholder_comment_count">12 Kommentarer</string>
+    <string name="placeholder_like_count">24 Liker</string>
+    <string name="placeholder_timestamp">12:31:53</string>
+    <string name="placeholder_group_name">Gruppenavn</string>
 
 </resources>

@@ -24,7 +24,8 @@ public class GroupFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_group, container, false);
 
-        postCardList.add(new PostCard(getString(R.string.socialcampus), getString(R.string.username), getString(R.string.placeholder_text)));
+        postCardList.add(new PostCard(getString(R.string.placeholder_title), getString(R.string.username), getString(R.string.placeholder_group_name), getString(R.string.placeholder_text),
+                                    getString(R.string.placeholder_comment_count), getString(R.string.placeholder_like_count), getString(R.string.placeholder_timestamp)));
 
         postRecyclerView = root.findViewById(R.id.group_post_recycler);
         postAdapter = new PostListAdapter(getContext(), postCardList);
