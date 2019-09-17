@@ -41,7 +41,7 @@
         <Preference
             app:icon="@drawable/ic_about"
             app:title="App versjon"
-            app:summary="1.2"/>
+            app:summary="@string/versionName"/>
     </PreferenceCategory>
 
 </PreferenceScreen>
