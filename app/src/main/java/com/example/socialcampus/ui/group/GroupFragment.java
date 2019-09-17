@@ -7,11 +7,13 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.socialcampus.R;
 import com.example.socialcampus.ui.group.PostListAdapter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.LinkedList;
 
@@ -31,6 +33,10 @@ public class GroupFragment extends Fragment {
         postAdapter = new PostListAdapter(getContext(), postCardList);
         postRecyclerView.setAdapter(postAdapter);
         postRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+
+        FloatingActionButton myFab = root.findViewById(R.id.new_post_button);
+        myFab.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_nav_groups_to_nav_new_post));
+
         return root;
     }
 

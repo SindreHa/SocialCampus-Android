@@ -31,7 +31,17 @@
         android:id="@+id/nav_groups"
         android:name="com.example.socialcampus.ui.group.GroupFragment"
         android:label="@string/menu_groups"
-        tools:layout="@layout/fragment_group" />
+        tools:layout="@layout/fragment_group" >
+        <action
+            android:id="@+id/action_nav_groups_to_nav_new_post"
+            app:destination="@id/nav_new_post" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_new_post"
+        android:name="com.example.socialcampus.ui.group.newPost"
+        android:label="@string/menu_new_post"
+        tools:layout="@layout/new_post" />
 
     <fragment
         android:id="@+id/nav_all_groups"
