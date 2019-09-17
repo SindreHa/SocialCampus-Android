@@ -34,8 +34,9 @@ public class GroupFragment extends Fragment {
         postRecyclerView.setAdapter(postAdapter);
         postRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
-        FloatingActionButton myFab = root.findViewById(R.id.new_post_button);
-        myFab.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_nav_groups_to_nav_new_post));
+        FloatingActionButton newPost = root.findViewById(R.id.new_post_button);
+        //https://developer.android.com/guide/navigation/navigation-getting-started#java
+        newPost.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_nav_groups_to_nav_new_post));
 
         return root;
     }

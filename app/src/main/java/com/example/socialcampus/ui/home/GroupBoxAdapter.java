@@ -60,6 +60,7 @@ public class GroupBoxAdapter extends RecyclerView.Adapter<GroupBoxAdapter.GroupB
             this.numMembers = itemView.findViewById(R.id.group_card_num_members);
             this.numPosts = itemView.findViewById(R.id.group_card_num_posts);
             this.adapter = adapter;
+            //https://developer.android.com/guide/navigation/navigation-getting-started#java
             itemView.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_nav_home_to_nav_groups));
         }
 

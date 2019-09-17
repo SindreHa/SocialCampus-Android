@@ -35,6 +35,8 @@ public class HomeFragment extends Fragment {
         gRecyclerView = root.findViewById(R.id.recyclerView_group);
         gAdapter = new GroupBoxAdapter(getContext(), gCardList);
         gRecyclerView.setAdapter(gAdapter);
+        
+        //https://stackoverflow.com/questions/2795833/check-orientation-on-android-phone
         int orientation = getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
             gRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
