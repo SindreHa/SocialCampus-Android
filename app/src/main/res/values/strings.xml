@@ -34,9 +34,7 @@
 
     <string name="placeholder_text">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-        nisi ut aliquip ex ea commodo consequat.</string>
+        sed do eiusmod tempor incididunt</string>
     <string name="placeholder_title">Duis aute irure dolor</string>
     <string name="placeholder_comment_count">12 Kommentarer</string>
     <string name="placeholder_like_count">24 Liker</string>
