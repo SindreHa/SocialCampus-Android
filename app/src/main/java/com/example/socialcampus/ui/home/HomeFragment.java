@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -16,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.socialcampus.R;
 import com.example.socialcampus.ui.group.PostCard;
 import com.example.socialcampus.ui.group.PostListAdapter;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.LinkedList;
 
@@ -27,15 +30,36 @@ public class HomeFragment extends Fragment {
     private final LinkedList<PostCard> postCardList = new LinkedList<>();
     private RecyclerView postRecyclerView;
     private PostListAdapter postAdapter;
+    private TabLayout tabLayout;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
+        TabLayout tabLayout = root.findViewById(R.id.tab_sort_home);
+
         gRecyclerView = root.findViewById(R.id.recyclerView_group);
         gAdapter = new GroupBoxAdapter(getContext(), gCardList);
         gRecyclerView.setAdapter(gAdapter);
-        
+
+        //https://stackoverflow.com/questions/38909542/how-to-animate-recyclerview-items-when-adapter-is-initialized-in-order
+        gRecyclerView.getViewTreeObserver().addOnPreDrawListener(
+                new ViewTreeObserver.OnPreDrawListener() {
+                    @Override
+                    public boolean onPreDraw() {
+                        gRecyclerView.getViewTreeObserver().removeOnPreDrawListener(this);
+                        for (int i = 0; i < gRecyclerView.getChildCount(); i++) {
+                            View v = gRecyclerView.getChildAt(i);
+                            v.setAlpha(0.0f);
+                            v.animate().alpha(1.0f)
+                                    .setDuration(200)
+                                    .setStartDelay(i * 100)
+                                    .start();
+                        }
+                        return true;
+                    }
+                });
+
         //https://stackoverflow.com/questions/2795833/check-orientation-on-android-phone
         int orientation = getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -49,13 +73,60 @@ public class HomeFragment extends Fragment {
         postRecyclerView.setAdapter(postAdapter);
         postRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
+        //https://stackoverflow.com/questions/38909542/how-to-animate-recyclerview-items-when-adapter-is-initialized-in-order
+        postRecyclerView.getViewTreeObserver().addOnPreDrawListener(
+                new ViewTreeObserver.OnPreDrawListener() {
 
-        initializeData();
+                    @Override
+                    public boolean onPreDraw() {
+                        postRecyclerView.getViewTreeObserver().removeOnPreDrawListener(this);
+                        for (int i = 0; i < postRecyclerView.getChildCount(); i++) {
+                            View v = postRecyclerView.getChildAt(i);
+                            v.setAlpha(0.0f);
+                            v.animate().alpha(1.0f)
+                                    .setDuration(200)
+                                    .setStartDelay(i * 200)
+                                    .start();
+                        }
+                        return true;
+                    }
+                });
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+
+                switch (tab.getPosition()) {
+                    case 0:
+                        initializeData(10);
+                        break;
+                    case 1:
+                        initializeData(2);
+                        break;
+                    case 2:
+                        initializeData(3);
+                        break;
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+           @Override
+           public void onTabReselected(TabLayout.Tab tab) {
+
+           }
+        });
+
+        initializeData(10);
 
         return root;
     }
 
-    private void initializeData() {
+    private void initializeData(int antallPoster) {
 
         //https://stackoverflow.com/questions/29819204/could-android-store-drawable-ids-like-an-integer-array
         TypedArray tArray = getResources().obtainTypedArray(
@@ -78,7 +149,7 @@ public class HomeFragment extends Fragment {
         }
 
         postCardList.clear();
-        for (int i=0; i<10; i++) {
+        for (int i=0; i<antallPoster; i++) {
             postCardList.add(new PostCard(getString(R.string.placeholder_title), getString(R.string.username), getString(R.string.placeholder_group_name), getString(R.string.placeholder_text),
                     getString(R.string.placeholder_comment_count), getString(R.string.placeholder_like_count), getString(R.string.placeholder_timestamp)));
         }
@@ -93,4 +164,15 @@ public class HomeFragment extends Fragment {
 
     }
 
+    private void makeSnackbar(String melding) {
+        //Viser snackbar som sier at ingen mailklient ble funnet
+        final Snackbar snackBar = Snackbar.make(getView(), melding, Snackbar.LENGTH_LONG);
+        snackBar.setAction("Ok", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                snackBar.dismiss();
+            }
+        });
+        snackBar.show();
+    }
 }
