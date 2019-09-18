@@ -7,8 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.widget.Toast;
-
+import android.view.animation.AccelerateDecelerateInterpolator;
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -30,7 +29,6 @@ public class HomeFragment extends Fragment {
     private final LinkedList<PostCard> postCardList = new LinkedList<>();
     private RecyclerView postRecyclerView;
     private PostListAdapter postAdapter;
-    private TabLayout tabLayout;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -51,8 +49,12 @@ public class HomeFragment extends Fragment {
                         for (int i = 0; i < gRecyclerView.getChildCount(); i++) {
                             View v = gRecyclerView.getChildAt(i);
                             v.setAlpha(0.0f);
-                            v.animate().alpha(1.0f)
-                                    .setDuration(200)
+                            v.setTranslationX(400);
+                            v.animate()
+                                    .translationX(0)
+                                    .setInterpolator(new AccelerateDecelerateInterpolator())
+                                    .alpha(1.0f)
+                                    .setDuration(550)
                                     .setStartDelay(i * 100)
                                     .start();
                         }
@@ -74,23 +76,7 @@ public class HomeFragment extends Fragment {
         postRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
         //https://stackoverflow.com/questions/38909542/how-to-animate-recyclerview-items-when-adapter-is-initialized-in-order
-        postRecyclerView.getViewTreeObserver().addOnPreDrawListener(
-                new ViewTreeObserver.OnPreDrawListener() {
 
-                    @Override
-                    public boolean onPreDraw() {
-                        postRecyclerView.getViewTreeObserver().removeOnPreDrawListener(this);
-                        for (int i = 0; i < postRecyclerView.getChildCount(); i++) {
-                            View v = postRecyclerView.getChildAt(i);
-                            v.setAlpha(0.0f);
-                            v.animate().alpha(1.0f)
-                                    .setDuration(200)
-                                    .setStartDelay(i * 200)
-                                    .start();
-                        }
-                        return true;
-                    }
-                });
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
 
@@ -154,6 +140,31 @@ public class HomeFragment extends Fragment {
                     getString(R.string.placeholder_comment_count), getString(R.string.placeholder_like_count), getString(R.string.placeholder_timestamp)));
         }
 
+        postRecyclerView.getViewTreeObserver().addOnPreDrawListener(
+                new ViewTreeObserver.OnPreDrawListener() {
+
+                    @Override
+                    public boolean onPreDraw() {
+                        postRecyclerView.getViewTreeObserver().removeOnPreDrawListener(this);
+                        int tid = 450;
+                        for (int i = 0; i < postRecyclerView.getChildCount(); i++) {
+                            tid = tid + 100;
+                            View v = postRecyclerView.getChildAt(i);
+                            View reCycler = postRecyclerView;
+                            v.setAlpha(1.0f);
+                            v.setTranslationY(reCycler.getHeight());
+                            v.animate()
+                                    .translationY(0)
+                                    .setInterpolator(new AccelerateDecelerateInterpolator())
+                                    .alpha(1.0f)
+                                    .setDuration(tid)
+                                    .setStartDelay(i * 50)
+                                    .start();
+                        }
+                        return true;
+                    }
+                });
+
         gAdapter.notifyDataSetChanged();
         postAdapter.notifyDataSetChanged();
     }
@@ -165,7 +176,6 @@ public class HomeFragment extends Fragment {
     }
 
     private void makeSnackbar(String melding) {
-        //Viser snackbar som sier at ingen mailklient ble funnet
         final Snackbar snackBar = Snackbar.make(getView(), melding, Snackbar.LENGTH_LONG);
         snackBar.setAction("Ok", new View.OnClickListener() {
             @Override
