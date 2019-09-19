@@ -2,22 +2,17 @@ package com.example.socialcampus.ui.about_us;
 
 import android.content.res.TypedArray;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import androidx.annotation.Nullable;
+import android.view.ViewTreeObserver;
+import android.view.animation.OvershootInterpolator;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.socialcampus.R;
-
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class AboutUsFragment extends Fragment {
@@ -37,6 +32,30 @@ public class AboutUsFragment extends Fragment {
         mAdapter = new AboutUsAdapter(getContext(), mAboutUsData);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        mRecyclerView.getViewTreeObserver().addOnPreDrawListener(
+                new ViewTreeObserver.OnPreDrawListener() {
+                    @Override
+                    public boolean onPreDraw() {
+                        mRecyclerView.getViewTreeObserver().removeOnPreDrawListener(this);
+                        int tid = 500;
+                        for (int i = 0; i < mRecyclerView.getChildCount(); i++) {
+                            tid = tid + 100;
+                            View v = mRecyclerView.getChildAt(i);
+                            v.setAlpha(1.0f);
+                            v.setScaleX(0);
+                            v.setScaleY(0);
+                            v.animate()
+                                    .setInterpolator(new OvershootInterpolator())
+                                    .scaleX(1)
+                                    .scaleY(1)
+                                    .alpha(1.0f)
+                                    .setDuration(tid)
+                                    .setStartDelay(i * 50)
+                                    .start();
+                        }
+                        return true;
+                    }
+                });
 
         initializeData();
 

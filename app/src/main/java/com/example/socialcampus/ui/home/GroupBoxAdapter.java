@@ -4,10 +4,13 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,11 +22,38 @@ public class GroupBoxAdapter extends RecyclerView.Adapter<GroupBoxAdapter.GroupB
 
     private final LinkedList<GroupBoxCard> boxCardList;
     private LayoutInflater inflater;
-    private HomeFragment homeFragment;
+    private int lastPosition = -1;
+    private Context context;
+
+    class GroupBoxHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        public final ImageView sportImg;
+        public final TextView sportTitle;
+        public final TextView numMembers;
+        public final TextView numPosts;
+        CardView container;
+        final GroupBoxAdapter adapter;
+
+        public GroupBoxHolder(View itemView, GroupBoxAdapter adapter){
+            super(itemView);
+            container = itemView.findViewById(R.id.groupCard);
+            this.sportImg = itemView.findViewById(R.id.group_card_img);
+            this.sportTitle = itemView.findViewById(R.id.group_card_title);
+            this.numMembers = itemView.findViewById(R.id.group_card_num_members);
+            this.numPosts = itemView.findViewById(R.id.group_card_num_posts);
+            this.adapter = adapter;
+            //https://developer.android.com/guide/navigation/navigation-getting-started#java
+            itemView.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_nav_home_to_nav_groups));
+        }
+
+        @Override
+        public void onClick(View view) {
+        }
+    }
 
     public GroupBoxAdapter(Context context, LinkedList<GroupBoxCard> boxCardList){
         inflater = LayoutInflater.from(context);
         this.boxCardList = boxCardList;
+        this.context = context;
     }
 
     @NonNull
@@ -39,6 +69,18 @@ public class GroupBoxAdapter extends RecyclerView.Adapter<GroupBoxAdapter.GroupB
         holder.sportTitle.setText(boxCardList.get(position).getDescription());
         holder.numMembers.setText(boxCardList.get(position).getCountMembers());
         holder.numPosts.setText(boxCardList.get(position).getCountPosts());
+        setAnimation(holder.itemView, position);
+    }
+
+    private void setAnimation(View viewToAnimate, int position)
+    {
+        // If the bound view wasn't previously displayed on screen, it's animated
+        if (position > lastPosition)
+        {
+            Animation animation = AnimationUtils.loadAnimation(context, R.anim.nav_default_enter_anim);
+            viewToAnimate.startAnimation(animation);
+            lastPosition = position;
+        }
     }
 
     @Override
@@ -46,26 +88,4 @@ public class GroupBoxAdapter extends RecyclerView.Adapter<GroupBoxAdapter.GroupB
         return boxCardList.size();
     }
 
-    class GroupBoxHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        public final ImageView sportImg;
-        public final TextView sportTitle;
-        public final TextView numMembers;
-        public final TextView numPosts;
-        final GroupBoxAdapter adapter;
-
-        public GroupBoxHolder(View itemView, GroupBoxAdapter adapter){
-            super(itemView);
-            this.sportImg = itemView.findViewById(R.id.group_card_img);
-            this.sportTitle = itemView.findViewById(R.id.group_card_title);
-            this.numMembers = itemView.findViewById(R.id.group_card_num_members);
-            this.numPosts = itemView.findViewById(R.id.group_card_num_posts);
-            this.adapter = adapter;
-            //https://developer.android.com/guide/navigation/navigation-getting-started#java
-            itemView.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_nav_home_to_nav_groups));
-        }
-
-        @Override
-        public void onClick(View view) {
-        }
-    }
 }

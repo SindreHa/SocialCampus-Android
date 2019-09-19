@@ -10,13 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.example.socialcampus.R;
-import com.example.socialcampus.ui.group.PostCard;
-import com.example.socialcampus.ui.group.PostListAdapter;
 import com.example.socialcampus.ui.home.GroupBoxAdapter;
 import com.example.socialcampus.ui.home.GroupBoxCard;
-import com.example.socialcampus.ui.home.HomeFragment;
 
 import java.util.LinkedList;
 
@@ -53,19 +52,47 @@ public class AllGroups extends Fragment {
         groupAdapter = new GroupBoxAdapter(getContext(), groupCardList);
         groupRecyclerView.setAdapter(groupAdapter);
         groupRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerAnimation(groupRecyclerView);
 
         groupRecyclerView = root.findViewById(R.id.all_groups_recycler_uteliv);
         groupAdapter = new GroupBoxAdapter(getContext(), groupCardList);
         groupRecyclerView.setAdapter(groupAdapter);
         groupRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerAnimation(groupRecyclerView);
 
         groupRecyclerView = root.findViewById(R.id.all_groups_recycler_sport);
         groupAdapter = new GroupBoxAdapter(getContext(), groupCardList);
         groupRecyclerView.setAdapter(groupAdapter);
         groupRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerAnimation(groupRecyclerView);
 
 
         return root;
+    }
+
+    private void recyclerAnimation(final RecyclerView recyclerView) {
+        recyclerView.getViewTreeObserver().addOnPreDrawListener(
+                new ViewTreeObserver.OnPreDrawListener() {
+                    @Override
+                    public boolean onPreDraw() {
+                        recyclerView.getViewTreeObserver().removeOnPreDrawListener(this);
+                        int tid = 500;
+                        for (int i = 0; i < recyclerView.getChildCount(); i++) {
+                            tid = tid + 100;
+                            View v = recyclerView.getChildAt(i);
+                            v.setAlpha(0.0f);
+                            v.setTranslationX(400);
+                            v.animate()
+                                    .translationX(0)
+                                    .setInterpolator(new AccelerateDecelerateInterpolator())
+                                    .alpha(1.0f)
+                                    .setDuration(550)
+                                    .setStartDelay(i * 100)
+                                    .start();
+                        }
+                        return true;
+                    }
+                });
     }
 
 }
