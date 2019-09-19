@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -14,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.socialcampus.R;
 
@@ -22,6 +25,9 @@ import com.example.socialcampus.R;
  */
 public class newPost extends Fragment implements AdapterView.OnItemSelectedListener {
 
+    private CardView sendCommentButton;
+    private TextView title;
+    private TextView comment;
 
     public newPost() {
     }
@@ -31,6 +37,10 @@ public class newPost extends Fragment implements AdapterView.OnItemSelectedListe
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.new_post, container, false);
+
+        sendCommentButton = root.findViewById(R.id.send_comment_button);
+        title = root.findViewById(R.id.new_post_title);
+        comment = root.findViewById(R.id.new_post_content);
 
         Spinner spinner = root.findViewById(R.id.group_chooser);
         if (spinner != null) {
@@ -44,6 +54,15 @@ public class newPost extends Fragment implements AdapterView.OnItemSelectedListe
             spinner.setAdapter(adapter);
         }
 
+        sendCommentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "yo", Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+
         return root;
     }
 
@@ -54,6 +73,10 @@ public class newPost extends Fragment implements AdapterView.OnItemSelectedListe
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
+
+    public void sendCommentToGroup(){
 
     }
 }
