@@ -32,6 +32,10 @@
     <string name="sign_up">Registrer deg</string>
     <string name="new_acc">Lag ny konto</string>
 
+    <!-- Splash screen -->
+    <string name="title_activity_splash">SplashActivity/</string>
+    <string name="welcome">Welcome to SocialCampus</string>
+
     <string name="placeholder_text">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit,
         sed do eiusmod tempor incididunt</string>
