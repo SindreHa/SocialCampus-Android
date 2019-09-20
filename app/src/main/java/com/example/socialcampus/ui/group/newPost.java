@@ -54,7 +54,7 @@ public class newPost extends Fragment implements AdapterView.OnItemSelectedListe
             spinner.setAdapter(adapter);
         }
 
-        sendCommentButton.setOnClickListener(new View.OnClickListener() {
+        sendPostButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "yo", Toast.LENGTH_LONG).show();
