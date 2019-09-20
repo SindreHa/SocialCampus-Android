@@ -25,7 +25,7 @@ import com.example.socialcampus.R;
  */
 public class newPost extends Fragment implements AdapterView.OnItemSelectedListener {
 
-    private CardView sendCommentButton;
+    private CardView sendPostButton;
     private TextView title;
     private TextView comment;
 
@@ -38,7 +38,7 @@ public class newPost extends Fragment implements AdapterView.OnItemSelectedListe
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.new_post, container, false);
 
-        sendCommentButton = root.findViewById(R.id.send_comment_button);
+        sendPostButton = root.findViewById(R.id.send_post_button);
         title = root.findViewById(R.id.new_post_title);
         comment = root.findViewById(R.id.new_post_content);
 
@@ -76,7 +76,7 @@ public class newPost extends Fragment implements AdapterView.OnItemSelectedListe
 
     }
 
-    public void sendCommentToGroup(){
+    public void sendPostToGroup(){
 
     }
 }
