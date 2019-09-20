@@ -11,17 +11,25 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.example.socialcampus.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.LinkedList;
 
-public class GroupFragment extends Fragment {
+public class GroupFragment extends Fragment implements Response.Listener<String>, Response.ErrorListener{
+
+
+    public final static String ENDPOINT = "https://itfag.usn.no/~kvisli/api.php";
 
     private final LinkedList<PostCard> postCardList = new LinkedList<>();
     private RecyclerView postRecyclerView;
     private PostListAdapter postAdapter;
+    private RestDbAdapterVolley restDbAdapter;
+    private PostCard postCard = null;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_group, container, false);
@@ -72,7 +80,7 @@ public class GroupFragment extends Fragment {
     }
 
     private void initializeData(int antallPoster) {
-
+        // Hente inn fra database her
         postCardList.clear();
         for (int i=0; i<antallPoster; i++) {
             postCardList.add(new PostCard(getString(R.string.placeholder_title), getString(R.string.username), getString(R.string.placeholder_group_name), getString(R.string.placeholder_text),
@@ -106,4 +114,13 @@ public class GroupFragment extends Fragment {
         postAdapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void onErrorResponse(VolleyError error) {
+
+    }
+
+    @Override
+    public void onResponse(String response) {
+
+    }
 }
