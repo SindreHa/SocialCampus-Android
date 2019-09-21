@@ -32,6 +32,15 @@
     <string name="sign_up">Registrer deg</string>
     <string name="new_acc">Lag ny konto</string>
 
+
+    <string name="sign_in">Sign In</string>
+    <string name="register">Register</string>
+    <string name="full_name">Full Name</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="already_having_account">Already Having an Account?</string>
+    <string name="not_having_account">Not Having an Account?</string>
+    <string name="logout">Logout</string>
+
     <!-- Splash screen -->
     <string name="title_activity_splash">SplashActivity/</string>
     <string name="welcome">Welcome to SocialCampus</string>
