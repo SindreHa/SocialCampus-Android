@@ -94,13 +94,7 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
     private void initializeData(int antallPoster) {
         // Hente inn fra database her
         postCardList.clear();
-        for (int i=0; i<antallPoster; i++) {
-            postCardList.add(new PostCard(getString(R.string.placeholder_title), getString(R.string.username), getString(R.string.placeholder_group_name), getString(R.string.placeholder_text),
-                    getString(R.string.placeholder_comment_count), getString(R.string.placeholder_like_count), getString(R.string.placeholder_timestamp)));
-        }
         lesEnPost();
-        postAnimation();
-        postAdapter.notifyDataSetChanged();
     }
 
     public void lesEnPost() {
@@ -119,16 +113,24 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
     }
 
     @Override
+    public void onResponse(String response) {
+        Toast.makeText(getContext(), response,
+                Toast.LENGTH_LONG).show();
+        for (int i=0; i<10; i++) {
+            postCardList.add(new PostCard(getString(R.string.placeholder_title), getString(R.string.username), getString(R.string.placeholder_group_name), getString(R.string.placeholder_text),
+                    getString(R.string.placeholder_comment_count), getString(R.string.placeholder_like_count), getString(R.string.placeholder_timestamp)));
+        }
+        postAnimation();
+        postAdapter.notifyDataSetChanged();
+    }
+
+    @Override
     public void onErrorResponse(VolleyError error) {
         Toast.makeText(getContext(), error.getMessage(),
                 Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void onResponse(String response) {
-        Toast.makeText(getContext(), response,
-                Toast.LENGTH_LONG).show();
-    }
+
 
     private boolean isOnline() {
         ConnectivityManager conMgr = (ConnectivityManager) getActivity().getSystemService(Activity.CONNECTIVITY_SERVICE);
