@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.socialcampus.R;
+import com.google.android.material.snackbar.Snackbar;
 
 /**
  * Created by Sindre Haavaldsen on 17.09.19.
@@ -57,7 +58,8 @@ public class newPost extends Fragment implements AdapterView.OnItemSelectedListe
         sendPostButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "yo", Toast.LENGTH_LONG).show();
+                Snackbar.make(getView(), "yo", Snackbar.LENGTH_LONG).show();
+                //Toast.makeText(getContext(), "yo", Toast.LENGTH_LONG).show();
             }
         });
 
