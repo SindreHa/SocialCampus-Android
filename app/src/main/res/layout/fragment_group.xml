@@ -36,22 +36,29 @@
             android:text="Populære" />
     </com.google.android.material.tabs.TabLayout>
 
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/group_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tab_sort_group">
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/group_post_recycler"
-            android:layout_below="@+id/tab_sort_group"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/new_post_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:layout_alignBottom="@+id/group_post_recycler"
-        android:layout_alignEnd="@+id/group_post_recycler"
+        android:layout_alignBottom="@+id/group_refresh"
+        android:layout_alignEnd="@+id/group_refresh"
         android:clickable="true"
         android:src="@drawable/ic_new_post"/>
 
-    "
+
 
 </RelativeLayout>

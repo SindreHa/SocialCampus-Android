@@ -1,6 +1,8 @@
 package com.example.socialcampus.ui.group;
 
 import android.app.Activity;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -20,6 +22,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -33,22 +36,19 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 import org.json.JSONException;
-
 import java.util.ArrayList;
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
-import java.util.LinkedList;
 
 public class GroupFragment extends Fragment implements Response.Listener<String>, Response.ErrorListener{
 
-
     public final static String ENDPOINT = "https://itfag.usn.no/~kvisli/api.php";
-
     private View root;
-
     private ArrayList<PostCard> postCardList = new ArrayList<>();
     private RecyclerView postRecyclerView;
     private PostListAdapter postAdapter;
     private RestDbAdapterVolley restDb;
+    private SwipeRefreshLayout refresh;
+    Boolean refreshed = false;
     private PostCard postCard = null;
     String LOG_TAG = GroupFragment.class.getSimpleName();
 
@@ -59,6 +59,25 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
         postAdapter = new PostListAdapter(getContext(), postCardList);
         postRecyclerView.setAdapter(postAdapter);
         postRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+
+        refresh = root.findViewById(R.id.group_refresh);
+        refresh.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
+        refresh.setOnRefreshListener(
+                new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        //Log.i(LOG_TAG, "onRefresh called from SwipeRefreshLayout");
+
+                        // This method performs the actual data-refresh operation.
+                        // The method calls setRefreshing(false) when it's finished.
+                        /*postAnimationOut();
+                        if(animasjon fullført){
+                            initializeData(0);
+                        }*/
+                        initializeData(0);
+                    }
+                }
+        );
 
         FloatingActionButton newPost = root.findViewById(R.id.new_post_button);
         //https://developer.android.com/guide/navigation/navigation-getting-started#java
@@ -154,6 +173,8 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
     private void initializeData(int antallPoster) {
         postCardList.clear();
         lesEnPost();
+        refresh.setRefreshing(false);
+
         /*
         postCardList.add(new PostCard(getString(R.string.placeholder_title), getString(R.string.username), getString(R.string.placeholder_group_name), getString(R.string.placeholder_text),
                     getString(R.string.placeholder_comment_count), getString(R.string.placeholder_like_count), getString(R.string.placeholder_timestamp)));
@@ -214,18 +235,43 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
                     @Override
                     public boolean onPreDraw() {
                         postRecyclerView.getViewTreeObserver().removeOnPreDrawListener(this);
-                        int tid = 450;
+                        int duration = 450;
                         for (int i = 0; i < postRecyclerView.getChildCount(); i++) {
-                            tid = tid + 100;
+                            duration = duration + 100;
                             View v = postRecyclerView.getChildAt(i);
-                            View reCycler = postRecyclerView;
+                            View pRecycler = postRecyclerView;
                             v.setAlpha(1.0f);
-                            v.setTranslationY(reCycler.getHeight());
+                            v.setTranslationY(pRecycler.getHeight());
                             v.animate()
                                     .translationY(0)
                                     .setInterpolator(new AccelerateDecelerateInterpolator())
                                     .alpha(1.0f)
-                                    .setDuration(tid)
+                                    .setDuration(duration)
+                                    .setStartDelay(i * 50)
+                                    .start();
+                        }
+                        return true;
+                    }
+                });
+    }
+
+    private void postAnimationOut(){
+        postRecyclerView.getViewTreeObserver().addOnPreDrawListener(
+                new ViewTreeObserver.OnPreDrawListener() {
+                    @Override
+                    public boolean onPreDraw() {
+                        postRecyclerView.getViewTreeObserver().removeOnPreDrawListener(this);
+                        int duration = 450;
+                        for (int i = 0; i < postRecyclerView.getChildCount(); i++) {
+                            duration = duration + 100;
+                            View v = postRecyclerView.getChildAt(i);
+                            View pRecycler = postRecyclerView;
+                            v.setTranslationX(0);
+                            v.animate()
+                                    .translationX(pRecycler.getWidth())
+                                    .setInterpolator(new AccelerateDecelerateInterpolator())
+                                    .alpha(1.0f)
+                                    .setDuration(duration)
                                     .setStartDelay(i * 50)
                                     .start();
                         }
