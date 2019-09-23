@@ -50,7 +50,7 @@ public class PostCard {
         this.postDescription  = jsonPost.optString(POST_DESCRIPTION);
         this.postCommentCount = jsonPost.optString(POST_COMMENT_COUNT);
         this.postLikeCount    = jsonPost.optString(POST_LIKE_COUNT);
-
+        this.postTimestamp    = POST_TIME_STAMP;
     }
 
     public PostCard() {}
