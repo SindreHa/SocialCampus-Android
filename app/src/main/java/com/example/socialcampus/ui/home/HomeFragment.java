@@ -19,6 +19,7 @@ import com.example.socialcampus.ui.group.PostListAdapter;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class HomeFragment extends Fragment {
@@ -26,7 +27,7 @@ public class HomeFragment extends Fragment {
     private final LinkedList<GroupBoxCard> gCardList = new LinkedList<>();
     private RecyclerView gRecyclerView;
     private GroupBoxAdapter gAdapter;
-    private final LinkedList<PostCard> postCardList = new LinkedList<>();
+    private final ArrayList<PostCard> postCardList = new ArrayList<>();
     private RecyclerView postRecyclerView;
     private PostListAdapter postAdapter;
 

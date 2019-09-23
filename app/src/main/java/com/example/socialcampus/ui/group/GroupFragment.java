@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,9 @@ import com.example.socialcampus.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
+import org.json.JSONException;
+
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class GroupFragment extends Fragment implements Response.Listener<String>, Response.ErrorListener{
@@ -36,7 +40,7 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
 
     private View root;
 
-    private final LinkedList<PostCard> postCardList = new LinkedList<>();
+    private ArrayList<PostCard> postCardList = new ArrayList<>();
     private RecyclerView postRecyclerView;
     private PostListAdapter postAdapter;
     private RestDbAdapterVolley restDbAdapter;
@@ -92,19 +96,22 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
 
 
     private void initializeData(int antallPoster) {
-        // Hente inn fra database her
         postCardList.clear();
         lesEnPost();
+        /*
+        postCardList.add(new PostCard(getString(R.string.placeholder_title), getString(R.string.username), getString(R.string.placeholder_group_name), getString(R.string.placeholder_text),
+                    getString(R.string.placeholder_comment_count), getString(R.string.placeholder_like_count), getString(R.string.placeholder_timestamp)));
+        */
+
     }
 
     public void lesEnPost() {
-        // postListeUrl må styres mot database
         //String postListeURL = ENDPOINT + "/Post/" + postNr.trim();
         if (isOnline()){
 
             RequestQueue queue = Volley.newRequestQueue(getContext());
             StringRequest stringRequest =
-                    new StringRequest(Request.Method.GET, "https://itfag.usn.no/~kvisli/api.php/Vare/33044", this, this);
+                    new StringRequest(Request.Method.GET, "https://itfag.usn.no/~kvisli/api.php/Vare?order=Betegnelse,asc&transform=1", this, this);
             queue.add(stringRequest);
         }else{
             Toast.makeText(getContext(), "Nettverksfeil.",
@@ -114,14 +121,20 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
 
     @Override
     public void onResponse(String response) {
-        Toast.makeText(getContext(), response,
-                Toast.LENGTH_LONG).show();
-        for (int i=0; i<10; i++) {
-            postCardList.add(new PostCard(getString(R.string.placeholder_title), getString(R.string.username), getString(R.string.placeholder_group_name), getString(R.string.placeholder_text),
-                    getString(R.string.placeholder_comment_count), getString(R.string.placeholder_like_count), getString(R.string.placeholder_timestamp)));
+        try{
+            postCardList = PostCard.lagPostListe(response);
+            oppdaterPostView(postCardList);
+        }catch (JSONException e){
+
         }
         postAnimation();
         postAdapter.notifyDataSetChanged();
+    }
+
+    public void oppdaterPostView(ArrayList<PostCard> nyPostListe) {
+        postAdapter = new PostListAdapter(getContext(), postCardList);
+        postRecyclerView.setAdapter(postAdapter);
+        postRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     @Override

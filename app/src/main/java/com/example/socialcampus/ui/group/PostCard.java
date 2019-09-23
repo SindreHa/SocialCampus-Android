@@ -1,6 +1,7 @@
 package com.example.socialcampus.ui.group;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,15 +21,15 @@ public class PostCard {
     private String postTimestamp;
 
 
-    // Må forandres for å passe mot verdiene i databasen (?)
+    // Må forandres for å passe mot verdiene i databasen
     static final String TABELL_NAVN        = "Post";
-    static final String POST_TITLE         = "tittel";
-    static final String POST_AUTHOR        = "forfatter";
-    static final String POST_GROUP_NAME    = "gruppeNavn";
-    static final String POST_DESCRIPTION   = "betegnelse";
-    static final String POST_COMMENT_COUNT = "kommentarAntall";
-    static final String POST_LIKE_COUNT    = "likesAntall";
-    static final String POST_TIME_STAMP    = "tidsPunkt";
+    static final String POST_TITLE         = "VNr";
+    static final String POST_AUTHOR        = "Betegnelse";
+    static final String POST_GROUP_NAME    = "Pris";
+    static final String POST_DESCRIPTION   = "KatNr";
+    static final String POST_COMMENT_COUNT = "Antall";
+    static final String POST_LIKE_COUNT    = "Hylle";
+    static final String POST_TIME_STAMP    = "13.37";
 
     public PostCard(String postTitle, String postAuthor, String postGroupName, String postDescription,
                     String postCommentCount, String postLikeCount, String postTimestamp){
@@ -42,15 +43,14 @@ public class PostCard {
         this.postTimestamp = postTimestamp;
     }
 
+    public PostCard(JSONObject jsonPost) {
+        this.postTitle        = jsonPost.optString(POST_TITLE);
+        this.postAuthor       = jsonPost.optString(POST_AUTHOR);
+        this.postGroupName    = jsonPost.optString(POST_GROUP_NAME);
+        this.postDescription  = jsonPost.optString(POST_DESCRIPTION);
+        this.postCommentCount = jsonPost.optString(POST_COMMENT_COUNT);
+        this.postLikeCount    = jsonPost.optString(POST_LIKE_COUNT);
 
-    public PostCard(JSONObject jsonVare) {
-        this.postTitle        = jsonVare.optString(POST_TITLE);
-        this.postAuthor       = jsonVare.optString(POST_AUTHOR);
-        this.postGroupName    = jsonVare.optString(POST_GROUP_NAME);
-        this.postDescription  = jsonVare.optString(POST_DESCRIPTION);
-        this.postCommentCount = jsonVare.optString(POST_COMMENT_COUNT);
-        this.postLikeCount    = jsonVare.optString(POST_LIKE_COUNT);
-        this.postTimestamp    = jsonVare.optString(POST_TIME_STAMP);
     }
 
     public PostCard() {}
@@ -59,12 +59,19 @@ public class PostCard {
             throws JSONException, NullPointerException {
         ArrayList<PostCard> postListe = new ArrayList<PostCard>();
         JSONObject jsonData  = new JSONObject(jsonPostString);
-        JSONArray jsonPostTabell = jsonData.optJSONArray(TABELL_NAVN);
-        for(int i = 0; i < jsonPostTabell.length(); i++) {
-            JSONObject jsonVare = (JSONObject) jsonPostTabell.get(i);
-            PostCard postKort = new PostCard(jsonVare);
-            postListe.add(postKort);
+        // "Vare" Må byttes om til hva nå enn poster heter i databasen
+        JSONArray jsonPostTabell = jsonData.optJSONArray("Vare");
+        if(jsonPostTabell != null) {
+            for (int i = 0; i < jsonPostTabell.length(); i++) {
+                JSONObject jsonPost = (JSONObject) jsonPostTabell.get(i);
+                // jsonPost må matche verdiene i databasetabellen post
+                PostCard postKort = new PostCard(jsonPost);
+                postListe.add(postKort);
+            }
+        }else {
+            System.out.println("jsonPostTabell null");
         }
+
         return postListe;
     }
 

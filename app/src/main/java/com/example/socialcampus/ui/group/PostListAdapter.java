@@ -12,11 +12,12 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.socialcampus.R;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class PostListAdapter extends RecyclerView.Adapter<com.example.socialcampus.ui.group.PostListAdapter.PostCardHolder>{
 
-    private final LinkedList<PostCard> postCardList;
+    private final ArrayList<PostCard> postCardList;
     private LayoutInflater inflater;
     private int lastPosition = -1;
     private Context context;
@@ -49,7 +50,7 @@ public class PostListAdapter extends RecyclerView.Adapter<com.example.socialcamp
         }
 
     }
-    public PostListAdapter(Context context, LinkedList<PostCard> postCardList){
+    public PostListAdapter(Context context, ArrayList<PostCard> postCardList){
         inflater = LayoutInflater.from(context);
         this.postCardList = postCardList;
         this.context = context;
