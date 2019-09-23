@@ -8,12 +8,15 @@ import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,8 +30,11 @@ import com.google.android.material.snackbar.Snackbar;
 public class newPost extends Fragment implements AdapterView.OnItemSelectedListener {
 
     private CardView sendPostButton;
-    private TextView title;
-    private TextView comment;
+    private EditText title;
+    private EditText content;
+    private RestDbAdapterVolley db;
+    private View view;
+    private Navigation navigator;
 
     public newPost() {
     }
@@ -38,10 +44,14 @@ public class newPost extends Fragment implements AdapterView.OnItemSelectedListe
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.new_post, container, false);
+        this.view = root;
+
+        db = new RestDbAdapterVolley(getContext());
+
 
         sendPostButton = root.findViewById(R.id.send_post_button);
         title = root.findViewById(R.id.new_post_title);
-        comment = root.findViewById(R.id.new_post_content);
+        content = root.findViewById(R.id.new_post_content);
 
         Spinner spinner = root.findViewById(R.id.group_chooser);
         if (spinner != null) {
@@ -54,11 +64,17 @@ public class newPost extends Fragment implements AdapterView.OnItemSelectedListe
         if (spinner != null) {
             spinner.setAdapter(adapter);
         }
-
         sendPostButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(getView(), "yo", Snackbar.LENGTH_LONG).show();
+               //Snackbar.make(getView(), "yo", Snackbar.LENGTH_LONG).show();
+                String mTitle = title.getText().toString();
+                String mContent = content.getText().toString();
+                PostCard postCard = new PostCard(mTitle, "Brukernavn", "Tennis", mContent, "344", "1273", "19:53" );
+                db.insertPostCard(postCard);
+                getFragmentManager().popBackStack();
+                
+
                 //Toast.makeText(getContext(), "yo", Toast.LENGTH_LONG).show();
             }
         });

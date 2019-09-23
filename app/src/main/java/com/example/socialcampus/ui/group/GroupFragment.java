@@ -45,6 +45,7 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
     private PostListAdapter postAdapter;
     private RestDbAdapterVolley restDbAdapter;
     private PostCard postCard = null;
+    String LOG_TAG = GroupFragment.class.getSimpleName();
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.root = inflater.inflate(R.layout.fragment_group, container, false);
@@ -122,6 +123,7 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
     @Override
     public void onResponse(String response) {
         try{
+            Log.d(LOG_TAG, response);
             postCardList = PostCard.lagPostListe(response);
             oppdaterPostView(postCardList);
         }catch (JSONException e){

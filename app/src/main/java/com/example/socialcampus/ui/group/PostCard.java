@@ -20,16 +20,18 @@ public class PostCard {
     private String postLikeCount;
     private String postTimestamp;
 
+    private String LOG_TAG = PostCard.class.getSimpleName();
+
 
     // Må forandres for å passe mot verdiene i databasen
     static final String TABELL_NAVN        = "post";
-    static final String POST_TITLE         = "VNr";
-    static final String POST_AUTHOR        = "Betegnelse";
-    static final String POST_GROUP_NAME    = "Pris";
-    static final String POST_DESCRIPTION   = "KatNr";
-    static final String POST_COMMENT_COUNT = "Antall";
-    static final String POST_LIKE_COUNT    = "Hylle";
-    static final String POST_TIME_STAMP    = "13.37";
+    static final String POST_TITLE         = "title";
+    static final String POST_AUTHOR        = "Brukernavn";
+    static final String POST_GROUP_NAME    = "Gruppenavn";
+    static final String POST_DESCRIPTION   = "content";
+    static final String POST_COMMENT_COUNT = "16";
+    static final String POST_LIKE_COUNT    = "likes";
+    static final String POST_TIME_STAMP    = "created";
 
     public PostCard(String postTitle, String postAuthor, String postGroupName, String postDescription,
                     String postCommentCount, String postLikeCount, String postTimestamp){
@@ -50,7 +52,7 @@ public class PostCard {
         this.postDescription  = jsonPost.optString(POST_DESCRIPTION);
         this.postCommentCount = jsonPost.optString(POST_COMMENT_COUNT);
         this.postLikeCount    = jsonPost.optString(POST_LIKE_COUNT);
-        this.postTimestamp    = POST_TIME_STAMP;
+        this.postTimestamp    = jsonPost.optString(POST_TIME_STAMP);
     }
 
     public PostCard() {}
@@ -60,7 +62,7 @@ public class PostCard {
         ArrayList<PostCard> postListe = new ArrayList<PostCard>();
         JSONObject jsonData  = new JSONObject(jsonPostString);
         // "Vare" Må byttes om til hva nå enn poster heter i databasen
-        JSONArray jsonPostTabell = jsonData.optJSONArray("Vare");
+        JSONArray jsonPostTabell = jsonData.optJSONArray(TABELL_NAVN);
         if(jsonPostTabell != null) {
             for (int i = 0; i < jsonPostTabell.length(); i++) {
                 JSONObject jsonPost = (JSONObject) jsonPostTabell.get(i);
@@ -69,7 +71,7 @@ public class PostCard {
                 postListe.add(postKort);
             }
         }else {
-            System.out.println("jsonPostTabell null");
+            System.out.println("jsonPostTabell null " + TABELL_NAVN);
         }
 
         return postListe;
