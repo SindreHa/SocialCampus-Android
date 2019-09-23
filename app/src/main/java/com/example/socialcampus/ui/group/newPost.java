@@ -1,8 +1,10 @@
 package com.example.socialcampus.ui.group;
 
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
@@ -13,6 +15,7 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -74,16 +77,19 @@ public class newPost extends Fragment implements AdapterView.OnItemSelectedListe
                 String mContent = content.getText().toString();
                 PostCard postCard = new PostCard(mTitle, "Brukernavn", "Tennis", mContent, "344", "1273", "19:53" );
                 db.insertPostCard(postCard);
+                hideKeyboardFrom(getContext(), v);
                 Navigation.findNavController(view).navigate(R.id.action_nav_new_post_to_nav_groups);
-
-
-                //Toast.makeText(getContext(), "yo", Toast.LENGTH_LONG).show();
             }
         });
 
 
 
         return root;
+    }
+
+    public static void hideKeyboardFrom(Context context, View view) {
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     @Override
