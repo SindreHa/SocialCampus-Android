@@ -21,7 +21,9 @@ import java.util.LinkedList;
 
 public class AllGroups extends Fragment {
 
-    private final LinkedList<GroupBoxCard> groupCardList = new LinkedList<>();
+    private final LinkedList<GroupBoxCard> alleGrupper = new LinkedList<>();
+    private final LinkedList<GroupBoxCard> uteliv = new LinkedList<>();
+    private final LinkedList<GroupBoxCard> sport = new LinkedList<>();
     private RecyclerView groupRecyclerView;
     private GroupBoxAdapter groupAdapter;
 
@@ -46,22 +48,28 @@ public class AllGroups extends Fragment {
         String[] gruppeAntPoster = getResources().getStringArray(R.array.group_post_count);
 
         for (int i = 0; i < 10; i++) {
-            groupCardList.add(new GroupBoxCard(gruppeBilder[i], gruppeTittel[i], gruppeAntMeldemmer[i], gruppeAntPoster[i]));
+            alleGrupper.add(new GroupBoxCard(gruppeBilder[i], gruppeTittel[i], gruppeAntMeldemmer[i], gruppeAntPoster[i]));
         }
         groupRecyclerView = root.findViewById(R.id.all_groups_recycler_all);
-        groupAdapter = new GroupBoxAdapter(getContext(), groupCardList);
+        groupAdapter = new GroupBoxAdapter(getContext(), alleGrupper);
         groupRecyclerView.setAdapter(groupAdapter);
         groupRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerAnimation(groupRecyclerView);
 
+        for (int i = 4; i < 8; i++) {
+            uteliv.add(new GroupBoxCard(gruppeBilder[i], gruppeTittel[i], gruppeAntMeldemmer[i], gruppeAntPoster[i]));
+        }
         groupRecyclerView = root.findViewById(R.id.all_groups_recycler_uteliv);
-        groupAdapter = new GroupBoxAdapter(getContext(), groupCardList);
+        groupAdapter = new GroupBoxAdapter(getContext(), uteliv);
         groupRecyclerView.setAdapter(groupAdapter);
         groupRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerAnimation(groupRecyclerView);
 
+        for (int i = 7; i < 10; i++) {
+            sport.add(new GroupBoxCard(gruppeBilder[i], gruppeTittel[i], gruppeAntMeldemmer[i], gruppeAntPoster[i]));
+        }
         groupRecyclerView = root.findViewById(R.id.all_groups_recycler_sport);
-        groupAdapter = new GroupBoxAdapter(getContext(), groupCardList);
+        groupAdapter = new GroupBoxAdapter(getContext(), sport);
         groupRecyclerView.setAdapter(groupAdapter);
         groupRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerAnimation(groupRecyclerView);
