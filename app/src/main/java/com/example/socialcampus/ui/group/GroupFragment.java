@@ -10,9 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -33,7 +35,7 @@ import com.google.android.material.tabs.TabLayout;
 import org.json.JSONException;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 import java.util.LinkedList;
 
 public class GroupFragment extends Fragment implements Response.Listener<String>, Response.ErrorListener{
@@ -66,9 +68,8 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
 
         restDb = new RestDbAdapterVolley(getContext());
 
-        ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(
-                ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT | ItemTouchHelper.DOWN
-                        | ItemTouchHelper.UP, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+        ItemTouchHelper.SimpleCallback helper = new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder,
                                   RecyclerView.ViewHolder target) {
@@ -77,23 +78,43 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                PostCard post = postCardList.get(viewHolder.getAdapterPosition());
-                restDb.deleteVare(post.getPostId());
-                postCardList.remove(viewHolder.getAdapterPosition());
-                postAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+                if (direction == ItemTouchHelper.LEFT) {
+                    PostCard post = postCardList.get(viewHolder.getAdapterPosition());
+                    restDb.deletePost(post.getPostId());
+                    postCardList.remove(viewHolder.getAdapterPosition());
+                    postAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
 
-                final Snackbar snackBar = Snackbar.make(getView(), "Innlegg slettet", Snackbar.LENGTH_LONG);
-                snackBar.setAction("Angre", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //Her kan man legge inn angrefunksjon på sletting av innlegg
-                        snackBar.dismiss();
-                    }
-                });
-                snackBar.show();
+                    final Snackbar snackBar = Snackbar.make(getView(), "Innlegg slettet", Snackbar.LENGTH_LONG);
+                    snackBar.setAction("Angre", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            //Her kan man legge inn angrefunksjon på sletting av innlegg
+                            snackBar.dismiss();
+                        }
+                    });
+                    snackBar.show();
+                }
             }
-        });
-        helper.attachToRecyclerView(postRecyclerView);
+
+            //https://github.com/xabaras/RecyclerViewSwipeDecorator
+            @Override
+            public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+                new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+                        .addSwipeLeftActionIcon(R.drawable.ic_delete)
+                        .setSwipeLeftActionIconTint(Color.RED)
+                        .addSwipeLeftLabel("Slett innlegg")
+                        .setSwipeLeftLabelColor(Color.WHITE)
+                        .addBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPrimaryBackground))
+                        .addSwipeRightActionIcon(R.drawable.ic_edit)
+                        .addSwipeRightLabel("Rediger innlegg")
+                        .setSwipeRightLabelColor(Color.WHITE)
+                        .create()
+                        .decorate();
+            }
+        };
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(helper);
+        itemTouchHelper.attachToRecyclerView(postRecyclerView);
 
         TabLayout tabLayout = root.findViewById(R.id.tab_sort_group);
 
