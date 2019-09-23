@@ -73,7 +73,7 @@ public class newPost extends Fragment implements AdapterView.OnItemSelectedListe
                 PostCard postCard = new PostCard(mTitle, "Brukernavn", "Tennis", mContent, "344", "1273", "19:53" );
                 db.insertPostCard(postCard);
                 getFragmentManager().popBackStack();
-                
+
 
                 //Toast.makeText(getContext(), "yo", Toast.LENGTH_LONG).show();
             }

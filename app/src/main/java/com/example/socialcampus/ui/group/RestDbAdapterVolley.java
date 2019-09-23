@@ -39,14 +39,14 @@ public class RestDbAdapterVolley {
     }
 
     public void updateVare(String postNr, PostCard postCard) {
-        String vare_URL = endpoint + "/Post/" + postNr;
+        String vare_URL = endpoint + "/post/" + postNr;
         JSONObject jsonVare = postCard.toJSONObject();
         addJSONRequest(Request.Method.PUT, vare_URL, jsonVare);
     }
 
     // Slett en vare med angitt varenummer
     public void deleteVare(String postNr) {
-        String vare_URL = endpoint + "/Vare/" + postNr;
+        String vare_URL = endpoint + "/post/" + postNr;
         addJSONRequest(Request.Method.DELETE, vare_URL, null);
     }
 

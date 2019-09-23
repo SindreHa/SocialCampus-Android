@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,11 +27,13 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.socialcampus.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 
 public class GroupFragment extends Fragment implements Response.Listener<String>, Response.ErrorListener{
@@ -43,7 +46,7 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
     private ArrayList<PostCard> postCardList = new ArrayList<>();
     private RecyclerView postRecyclerView;
     private PostListAdapter postAdapter;
-    private RestDbAdapterVolley restDbAdapter;
+    private RestDbAdapterVolley restDb;
     private PostCard postCard = null;
     String LOG_TAG = GroupFragment.class.getSimpleName();
 
@@ -60,6 +63,37 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
         newPost.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_nav_groups_to_nav_new_post));
 
         initializeData(20);
+
+        restDb = new RestDbAdapterVolley(getContext());
+
+        ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(
+                ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT | ItemTouchHelper.DOWN
+                        | ItemTouchHelper.UP, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder,
+                                  RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                PostCard post = postCardList.get(viewHolder.getAdapterPosition());
+                restDb.deleteVare(post.getPostId());
+                postCardList.remove(viewHolder.getAdapterPosition());
+                postAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+
+                final Snackbar snackBar = Snackbar.make(getView(), "Innlegg slettet", Snackbar.LENGTH_LONG);
+                snackBar.setAction("Angre", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //Her kan man legge inn angrefunksjon på sletting av innlegg
+                        snackBar.dismiss();
+                    }
+                });
+                snackBar.show();
+            }
+        });
+        helper.attachToRecyclerView(postRecyclerView);
 
         TabLayout tabLayout = root.findViewById(R.id.tab_sort_group);
 

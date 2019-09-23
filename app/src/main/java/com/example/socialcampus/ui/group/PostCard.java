@@ -19,6 +19,7 @@ public class PostCard {
     private String postCommentCount;
     private String postLikeCount;
     private String postTimestamp;
+    private String postId;
 
     private String LOG_TAG = PostCard.class.getSimpleName();
 
@@ -32,6 +33,7 @@ public class PostCard {
     static final String POST_COMMENT_COUNT = "16";
     static final String POST_LIKE_COUNT    = "likes";
     static final String POST_TIME_STAMP    = "created";
+    static final String POST_ID            = "id";
 
     public PostCard(String postTitle, String postAuthor, String postGroupName, String postDescription,
                     String postCommentCount, String postLikeCount, String postTimestamp){
@@ -53,6 +55,7 @@ public class PostCard {
         this.postCommentCount = jsonPost.optString(POST_COMMENT_COUNT);
         this.postLikeCount    = jsonPost.optString(POST_LIKE_COUNT);
         this.postTimestamp    = jsonPost.optString(POST_TIME_STAMP);
+        this.postId           = jsonPost.optString(POST_ID);
     }
 
     public PostCard() {}
@@ -87,6 +90,7 @@ public class PostCard {
             jsonPost.put(POST_COMMENT_COUNT, this.postCommentCount);
             jsonPost.put(POST_LIKE_COUNT, this.postLikeCount);
             jsonPost.put(POST_TIME_STAMP, this.postTimestamp);
+            jsonPost.put(POST_ID, this.postId);
         }
         catch (JSONException e) {
             return null;
@@ -135,5 +139,9 @@ public class PostCard {
 
     public String getPostTimestamp() {
         return this.postTimestamp;
+    }
+
+    public String getPostId() {
+        return this.postId;
     }
 }
