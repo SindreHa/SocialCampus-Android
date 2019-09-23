@@ -48,11 +48,11 @@ public class newPost extends Fragment implements AdapterView.OnItemSelectedListe
 
         db = new RestDbAdapterVolley(getContext());
 
-
         sendPostButton = root.findViewById(R.id.send_post_button);
         title = root.findViewById(R.id.new_post_title);
         content = root.findViewById(R.id.new_post_content);
 
+        //Spinner for valg av gruppe
         Spinner spinner = root.findViewById(R.id.group_chooser);
         if (spinner != null) {
             spinner.setOnItemSelectedListener(this);
@@ -64,6 +64,8 @@ public class newPost extends Fragment implements AdapterView.OnItemSelectedListe
         if (spinner != null) {
             spinner.setAdapter(adapter);
         }
+
+        //Funksjon for trykk på publiseringsknapp
         sendPostButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,7 +74,7 @@ public class newPost extends Fragment implements AdapterView.OnItemSelectedListe
                 String mContent = content.getText().toString();
                 PostCard postCard = new PostCard(mTitle, "Brukernavn", "Tennis", mContent, "344", "1273", "19:53" );
                 db.insertPostCard(postCard);
-                getFragmentManager().popBackStack();
+                Navigation.findNavController(view).navigate(R.id.action_nav_new_post_to_nav_groups);
 
 
                 //Toast.makeText(getContext(), "yo", Toast.LENGTH_LONG).show();
