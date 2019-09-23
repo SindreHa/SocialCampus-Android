@@ -16,7 +16,7 @@ import org.json.JSONObject;
 
 public class RestDbAdapterVolley {
     // Må forandres (får vondt i huet av database)
-    static final String endpoint = "https://itfag.usn.no/~kvisli/api.php";
+    static final String endpoint = "https://itfag.usn.no/~146005/api.php";
 
     private Context ctx;
     private RequestQueue queue;
@@ -33,7 +33,7 @@ public class RestDbAdapterVolley {
     }
 
     public void insertPostCard(PostCard nyPost) {
-        String post_URL = endpoint + "/Post";
+        String post_URL = endpoint + "/post";
         JSONObject jsonPost = nyPost.toJSONObject();
         addJSONRequest(Request.Method.POST, post_URL, jsonPost);
     }

@@ -22,7 +22,7 @@ public class PostCard {
 
 
     // Må forandres for å passe mot verdiene i databasen
-    static final String TABELL_NAVN        = "Post";
+    static final String TABELL_NAVN        = "post";
     static final String POST_TITLE         = "VNr";
     static final String POST_AUTHOR        = "Betegnelse";
     static final String POST_GROUP_NAME    = "Pris";
@@ -76,20 +76,20 @@ public class PostCard {
     }
 
     public JSONObject toJSONObject() {
-        JSONObject jsonVare = new JSONObject();
+        JSONObject jsonPost = new JSONObject();
         try {
-            jsonVare.put(POST_TITLE, this.postTitle);
-            jsonVare.put(POST_AUTHOR, this.postAuthor);
-            jsonVare.put(POST_GROUP_NAME, this.postGroupName);
-            jsonVare.put(POST_DESCRIPTION, this.postDescription);
-            jsonVare.put(POST_COMMENT_COUNT, this.postCommentCount);
-            jsonVare.put(POST_LIKE_COUNT, this.postLikeCount);
-            jsonVare.put(POST_TIME_STAMP, this.postTimestamp);
+            jsonPost.put(POST_TITLE, this.postTitle);
+            jsonPost.put(POST_AUTHOR, this.postAuthor);
+            jsonPost.put(POST_GROUP_NAME, this.postGroupName);
+            jsonPost.put(POST_DESCRIPTION, this.postDescription);
+            jsonPost.put(POST_COMMENT_COUNT, this.postCommentCount);
+            jsonPost.put(POST_LIKE_COUNT, this.postLikeCount);
+            jsonPost.put(POST_TIME_STAMP, this.postTimestamp);
         }
         catch (JSONException e) {
             return null;
         }
-        return jsonVare;
+        return jsonPost;
     }
 
 
