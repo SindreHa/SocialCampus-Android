@@ -66,15 +66,7 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
                 new SwipeRefreshLayout.OnRefreshListener() {
                     @Override
                     public void onRefresh() {
-                        //Log.i(LOG_TAG, "onRefresh called from SwipeRefreshLayout");
-
-                        // This method performs the actual data-refresh operation.
-                        // The method calls setRefreshing(false) when it's finished.
-                        /*postAnimationOut();
-                        if(animasjon fullført){
-                            initializeData(0);
-                        }*/
-                        initializeData(0);
+                        postAnimationOut();
                     }
                 }
         );
@@ -174,6 +166,8 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
         postCardList.clear();
         lesEnPost();
         refresh.setRefreshing(false);
+        //Aktiver scrolling for recyclerview etter animasjon
+        postRecyclerView.setLayoutFrozen(false);
 
         /*
         postCardList.add(new PostCard(getString(R.string.placeholder_title), getString(R.string.username), getString(R.string.placeholder_group_name), getString(R.string.placeholder_text),
@@ -206,6 +200,8 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
 
         }
         postAnimation();
+        //Aktiver scrolling for recyclerview etter animasjon
+        postRecyclerView.setLayoutFrozen(false);
         postAdapter.notifyDataSetChanged();
     }
 
@@ -230,6 +226,8 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
     }
 
     private void postAnimation(){
+        //Deaktiver scrolling for å unngå krasj som skjer hvor man scroller samtidig som animasjon
+        postRecyclerView.setLayoutFrozen(true);
         postRecyclerView.getViewTreeObserver().addOnPreDrawListener(
                 new ViewTreeObserver.OnPreDrawListener() {
                     @Override
@@ -256,6 +254,8 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
     }
 
     private void postAnimationOut(){
+        //Deaktiver scrolling for å unngå krasj som skjer hvor man scroller samtidig som animasjon
+        postRecyclerView.setLayoutFrozen(true);
         postRecyclerView.getViewTreeObserver().addOnPreDrawListener(
                 new ViewTreeObserver.OnPreDrawListener() {
                     @Override
@@ -270,9 +270,14 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
                             v.animate()
                                     .translationX(pRecycler.getWidth())
                                     .setInterpolator(new AccelerateDecelerateInterpolator())
-                                    .alpha(1.0f)
+                                    .alpha(0f)
                                     .setDuration(duration)
                                     .setStartDelay(i * 50)
+                                    .withEndAction(new Thread(new Runnable() {
+                                        public void run() {
+                                            initializeData(0);
+                                        }
+                                    }))
                                     .start();
                         }
                         return true;
