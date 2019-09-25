@@ -15,6 +15,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
@@ -45,17 +46,21 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
     private PostListAdapter postAdapter;
     private SwipeRefreshLayout refresh;
     private RestDbAdapterVolley restDb;
-    private ArrayList<PostCard> postCardList    = new ArrayList<>();
-    private final String LOG_TAG                = GroupFragment.class.getSimpleName();
+    private ArrayList<PostCard> postCardList = new ArrayList<>();
+    private final String LOG_TAG = GroupFragment.class.getSimpleName();
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         this.view = inflater.inflate(R.layout.fragment_group, container, false);
 
         initializeView();
-        initializeData();
 
         return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        initializeData();
     }
 
     private void initializeView() {
@@ -77,7 +82,9 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
 
         //Refresh listener
         refresh = view.findViewById(R.id.group_refresh);
-        refresh.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
+        refresh.setColorSchemeColors(getResources().getColor(R.color.colorAccent), Color.RED, Color.GREEN);
+        refresh.setProgressBackgroundColorSchemeColor(getResources().getColor(R.color.colorPrimary));
+        refresh.setRefreshing(true);
         refresh.setOnRefreshListener(
                 new SwipeRefreshLayout.OnRefreshListener() {
                     @Override
@@ -184,8 +191,6 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
         restDb= new RestDbAdapterVolley(getContext());
         postCardList.clear();
         getPostData();
-        //Stopper refresh ikonet
-        refresh.setRefreshing(false);
         //Aktiver scrolling for recyclerview etter animasjon
         postRecyclerView.setLayoutFrozen(false);
     }
@@ -213,7 +218,9 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
         try{
             Log.d(LOG_TAG, response);
             postCardList = PostCard.lagPostListe(response);
-            oppdaterPostView();
+            updatePostRecycler();
+            //Stopper refresh ikonet
+            refresh.setRefreshing(false);
         }catch (JSONException e){
 
         }
@@ -229,7 +236,7 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
                 Toast.LENGTH_SHORT).show();
     }
 
-    public void oppdaterPostView() {
+    public void updatePostRecycler() {
         postAdapter = new PostListAdapter(getContext(), postCardList);
         postRecyclerView.setAdapter(postAdapter);
         postRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

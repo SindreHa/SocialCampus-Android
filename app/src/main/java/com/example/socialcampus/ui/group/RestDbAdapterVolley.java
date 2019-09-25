@@ -15,18 +15,17 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONObject;
 
 public class RestDbAdapterVolley {
-    // Må forandres (får vondt i huet av database)
-    static final String endpoint = "https://itfag.usn.no/~146005/api.php";
 
+    // TODO Må forandres (får vondt i huet av database)
+    static final String endpoint = "https://itfag.usn.no/~146005/api.php";
     private Context ctx;
     private RequestQueue queue;
+    private boolean updatedOK = false;
 
     public RestDbAdapterVolley(Context ctx) {
         this.ctx = ctx;
         queue = Volley.newRequestQueue(ctx);
     }
-
-    private boolean updatedOK = false;
 
     public boolean isRestCallOK() {
         return updatedOK;
@@ -69,8 +68,7 @@ public class RestDbAdapterVolley {
             queue.add(jsonObjRequest);
         }
     }
-
-
+    
     // Fant ikke en u-depricata versjon av samme koden...
     public boolean isOnline() {
         ConnectivityManager conMgr = (ConnectivityManager) ctx.getSystemService(Activity.CONNECTIVITY_SERVICE);
