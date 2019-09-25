@@ -8,6 +8,9 @@ import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,10 +29,17 @@ public class fragment_settings extends PreferenceFragmentCompat {
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         addPreferencesFromResource(R.xml.preferences);
 
+        //https://stackoverflow.com/questions/4005029/how-can-i-set-the-android-preference-summary-text-color/4047054#4047054
+        Preference app_version = findPreference("app_version");
+        Spannable summary = new SpannableString(getString(R.string.versionName));
+        summary.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.textWhiteSecondary)), 0, summary.length(), 0);
+        app_version.setSummary(summary);
+
         /*
         * Metode for å åpne mailklient for å sende tilbakemelding
         * https://stackoverflow.com/questions/5330677/android-preferences-onclick-event
         */
+
         Preference tilbakemeldingMail = findPreference("tilbakemelding");
         tilbakemeldingMail.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             public boolean onPreferenceClick(Preference preference) {

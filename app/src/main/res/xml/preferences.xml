@@ -39,9 +39,12 @@
             app:title="Opphavrettsinformasjon"
             app:summary="SocialCampus © 2019"/>
         <Preference
+            app:key="app_version"
+            android:enabled="false"
             app:icon="@drawable/ic_about"
             app:title="App versjon"
-            app:summary="@string/versionName"/>
+            app:summary="@string/versionName"
+            />
     </PreferenceCategory>
 
 </PreferenceScreen>
