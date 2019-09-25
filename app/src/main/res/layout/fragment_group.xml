@@ -6,17 +6,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                app:title="Tennis"
+            <!--<androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_group"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@color/colorAccent">
-            </androidx.appcompat.widget.Toolbar>
+                android:layout_height="100dp"
+                android:background="@color/colorPrimary">
+            </androidx.appcompat.widget.Toolbar>-->
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/toolbar_group"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:cardBackgroundColor="@color/colorPrimaryDark">
+        <ImageView
+            android:id="@+id/group_header_img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:alpha=".8">
+        </ImageView>
+        <TextView
+            android:id="@+id/group_header_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|left"
+            android:text="Basketball"
+            android:paddingLeft="20dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"/>
+    </androidx.cardview.widget.CardView>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_sort_group"
-        android:layout_below="@id/toolbar"
+        android:layout_below="@id/toolbar_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

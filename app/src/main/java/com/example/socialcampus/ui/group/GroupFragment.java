@@ -1,6 +1,7 @@
 package com.example.socialcampus.ui.group;
 
 import android.app.Activity;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
@@ -12,10 +13,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
@@ -30,6 +34,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.example.socialcampus.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -37,7 +42,12 @@ import com.google.android.material.tabs.TabLayout;
 
 import org.json.JSONException;
 import java.util.ArrayList;
+import java.util.Random;
+
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
+import jp.wasabeef.glide.transformations.BlurTransformation;
+
+import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 
 public class GroupFragment extends Fragment implements Response.Listener<String>, Response.ErrorListener{
 
@@ -64,9 +74,34 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
     }
 
     private void initializeView() {
+        setGroupHeader();
         recyclerViewInit();
         tabViewInit();
         floatingButtonInit();
+
+    }
+
+    private void setGroupHeader() {
+        Random ran = new Random();
+        int x = ran.nextInt(10);
+
+        //Hent inn drawable Id'er til bilder
+        TypedArray tArray = getResources().obtainTypedArray(R.array.group_pictures);
+        int count = tArray.length();
+        int[] imgIdArr = new int[count];
+            for (int i = 0; i < imgIdArr.length; i++) {
+                imgIdArr[i] = tArray.getResourceId(i, 0);
+            }
+        tArray.recycle();
+
+        int[] groupImg = imgIdArr;
+        Glide.with(getContext()).load(groupImg[x])
+                .apply(bitmapTransform(new BlurTransformation(50)))
+                .into((ImageView) view.findViewById(R.id.group_header_img));
+
+        TextView headerTitle = view.findViewById(R.id.group_header_title);
+        String[] gruppeNavn = getResources().getStringArray(R.array.group_title);
+        headerTitle.setText(gruppeNavn[x]);
     }
 
     private void recyclerViewInit() {
@@ -188,11 +223,9 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
     }
 
     private void initializeData() {
-        restDb= new RestDbAdapterVolley(getContext());
+        restDb = new RestDbAdapterVolley(getContext());
         postCardList.clear();
         getPostData();
-        //Aktiver scrolling for recyclerview etter animasjon
-        postRecyclerView.setLayoutFrozen(false);
     }
 
     private boolean isOnline() {
@@ -216,7 +249,7 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
     @Override
     public void onResponse(String response) {
         try{
-            Log.d(LOG_TAG, response);
+            //Log.d(LOG_TAG, response);
             postCardList = PostCard.lagPostListe(response);
             updatePostRecycler();
             //Stopper refresh ikonet
@@ -224,10 +257,9 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
         }catch (JSONException e){
 
         }
-        postAnimation();
         //Aktiver scrolling for recyclerview etter animasjon
-        postRecyclerView.setLayoutFrozen(false);
         postAdapter.notifyDataSetChanged();
+        postAnimation();
     }
 
     @Override
@@ -244,7 +276,7 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
 
     private void postAnimation(){
         //Deaktiver scrolling for å unngå krasj som skjer hvor man scroller samtidig som animasjon
-        postRecyclerView.setLayoutFrozen(true);
+        //postRecyclerView.setLayoutFrozen(true);
         postRecyclerView.getViewTreeObserver().addOnPreDrawListener(
                 new ViewTreeObserver.OnPreDrawListener() {
                     @Override
@@ -272,7 +304,7 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
 
     private void postAnimationOut(){
         //Deaktiver scrolling for å unngå krasj som skjer hvor man scroller samtidig som animasjon
-        postRecyclerView.setLayoutFrozen(true);
+        //postRecyclerView.setLayoutFrozen(true);
         postRecyclerView.getViewTreeObserver().addOnPreDrawListener(
                 new ViewTreeObserver.OnPreDrawListener() {
                     @Override
@@ -287,12 +319,14 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
                             v.animate()
                                     .translationX(pRecycler.getWidth())
                                     .setInterpolator(new AccelerateDecelerateInterpolator())
-                                    .alpha(0f)
+                                    .alpha(-3f)
                                     .setDuration(duration)
                                     .setStartDelay(i * 50)
                                     .withEndAction(new Thread(new Runnable() {
                                         public void run() {
                                             initializeData();
+                                            //Aktiver scrolling for recyclerview etter animasjon
+                                            //postRecyclerView.setLayoutFrozen(false);
                                         }
                                     }))
                                     .start();
