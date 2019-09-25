@@ -38,6 +38,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
     <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_sort_home"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -63,12 +64,10 @@
         android:layout_height="wrap_content"
         android:scrollbars="vertical">
 
-            <fragment
-                android:id="@+id/fragment_container"
-                android:name="com.example.socialcampus.ui.home.PostFragment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:layout="@layout/post_fragment" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/group_post_recycler_home"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
         </androidx.core.widget.NestedScrollView>
 
