@@ -17,7 +17,7 @@ public class LogInFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_log_in, container, false);
 
-        TextView button = view.findViewById(R.id.createUser);
+        TextView button = view.findViewById(R.id.btnLoginRegister);
         button.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_nav_log_in_to_nav_sign_up));
 
         return view;
