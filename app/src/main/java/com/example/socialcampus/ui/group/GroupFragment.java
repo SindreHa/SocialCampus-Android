@@ -182,7 +182,7 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
 
             RequestQueue queue = Volley.newRequestQueue(getContext());
             StringRequest stringRequest =
-                    new StringRequest(Request.Method.GET, "https://itfag.usn.no/~146005/api.php/post?order=user_id,asc&transform=1", this, this);
+                    new StringRequest(Request.Method.GET, "https://itfag.usn.no/~146005/api.php/post?order=id,desc&transform=1", this, this);
             queue.add(stringRequest);
         }else{
             Toast.makeText(getContext(), "Nettverksfeil.",
