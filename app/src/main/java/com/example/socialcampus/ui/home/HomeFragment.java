@@ -201,7 +201,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void makeSnackbar(String melding) {
-        final Snackbar snackBar = Snackbar.make(getView(), melding, Snackbar.LENGTH_LONG);
+        final Snackbar snackBar = Snackbar.make(view, melding, Snackbar.LENGTH_LONG);
         snackBar.setAction("Ok", new View.OnClickListener() {
             @Override
             public void onClick(View v) {

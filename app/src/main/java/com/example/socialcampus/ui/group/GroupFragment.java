@@ -15,6 +15,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
@@ -53,9 +54,13 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
         this.view = inflater.inflate(R.layout.fragment_group, container, false);
 
         initializeView();
-        initializeData();
 
         return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        initializeData();
     }
 
     private void initializeView() {
@@ -213,7 +218,7 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
         try{
             Log.d(LOG_TAG, response);
             postCardList = PostCard.lagPostListe(response);
-            oppdaterPostView();
+            updatePostRecycler();
         }catch (JSONException e){
 
         }
@@ -229,7 +234,7 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
                 Toast.LENGTH_SHORT).show();
     }
 
-    public void oppdaterPostView() {
+    public void updatePostRecycler() {
         postAdapter = new PostListAdapter(getContext(), postCardList);
         postRecyclerView.setAdapter(postAdapter);
         postRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
