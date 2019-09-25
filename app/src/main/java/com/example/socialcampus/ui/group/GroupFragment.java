@@ -44,13 +44,12 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
     private RecyclerView postRecyclerView;
     private PostListAdapter postAdapter;
     private SwipeRefreshLayout refresh;
-
-    public final static String ENDPOINT         = "https://itfag.usn.no/~kvisli/api.php";
+    private RestDbAdapterVolley restDb;
     private ArrayList<PostCard> postCardList    = new ArrayList<>();
-    private RestDbAdapterVolley restDb          = new RestDbAdapterVolley(getContext());
-    String LOG_TAG                              = GroupFragment.class.getSimpleName();
+    private final String LOG_TAG                = GroupFragment.class.getSimpleName();
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         this.view = inflater.inflate(R.layout.fragment_group, container, false);
 
         initializeView();
@@ -182,6 +181,7 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
     }
 
     private void initializeData() {
+        restDb= new RestDbAdapterVolley(getContext());
         postCardList.clear();
         getPostData();
         //Stopper refresh ikonet
