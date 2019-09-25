@@ -85,13 +85,13 @@ public class HomeFragment extends Fragment {
 
                 switch (tab.getPosition()) {
                     case 0:
-                        initializeData();
+                        setTabViewData();
                         break;
                     case 1:
-                        initializeData();
+                        setTabViewData();
                         break;
                     case 2:
-                        initializeData();
+                        setTabViewData();
                         break;
                 }
             }
@@ -125,12 +125,12 @@ public class HomeFragment extends Fragment {
         }
         tArray.recycle();
 
-        int[] gruppeBilder = ids;
-        String[] gruppeTittel = getResources().getStringArray(R.array.group_title);
-        String[] gruppeAntMeldemmer = getResources().getStringArray(R.array.group_member_count);
-        String[] gruppeAntPoster = getResources().getStringArray(R.array.group_post_count);
+        int[] groupImg = ids;
+        String[] groupTitle = getResources().getStringArray(R.array.group_title);
+        String[] groupNumMembers = getResources().getStringArray(R.array.group_member_count);
+        String[] groupNumPosts = getResources().getStringArray(R.array.group_post_count);
 
-        setData(gruppeBilder, gruppeTittel, gruppeAntMeldemmer, gruppeAntPoster);
+        setData(groupImg, groupTitle, groupNumMembers, groupNumPosts);
     }
 
     private void setData(int[] groupImg, String[] groupTitle, String[] groupNumMembers, String[] groupNumPosts) {
@@ -146,6 +146,16 @@ public class HomeFragment extends Fragment {
                     getString(R.string.placeholder_comment_count), getString(R.string.placeholder_like_count), getString(R.string.placeholder_timestamp)));
         }
         postAdapter.notifyDataSetChanged();
+    }
+
+    private void setTabViewData() {
+        postCardList.clear();
+        for (int i=0; i<20; i++) {
+            postCardList.add(new PostCard(getString(R.string.placeholder_title), getString(R.string.username), getString(R.string.placeholder_group_name), getString(R.string.placeholder_text),
+                    getString(R.string.placeholder_comment_count), getString(R.string.placeholder_like_count), getString(R.string.placeholder_timestamp)));
+        }
+        postAdapter.notifyDataSetChanged();
+        postAnimation();
     }
 
     private void groupBoxAnimation() {
