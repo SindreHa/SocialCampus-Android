@@ -37,11 +37,9 @@ public class newPost extends Fragment implements AdapterView.OnItemSelectedListe
     private EditText content;
     private RestDbAdapterVolley db;
     private View view;
-    private Navigation navigator;
 
     public newPost() {
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -72,21 +70,20 @@ public class newPost extends Fragment implements AdapterView.OnItemSelectedListe
         sendPostButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               //Snackbar.make(getView(), "yo", Snackbar.LENGTH_LONG).show();
                 String mTitle = title.getText().toString();
                 String mContent = content.getText().toString();
                 PostCard postCard = new PostCard(mTitle, "Brukernavn", "Tennis", mContent, "344", "1273", "19:53" );
                 db.insertPostCard(postCard);
                 hideKeyboardFrom(getContext(), v);
+
+                //Ødelegger new_post fargmentet https://developer.android.com/guide/navigation/navigation-navigate#back-stack
                 Navigation.findNavController(view).popBackStack();
             }
         });
-
-
-
         return root;
     }
 
+    //Legger ned virtuelt tastatur https://stackoverflow.com/questions/1109022/close-hide-the-android-soft-keyboard
     public static void hideKeyboardFrom(Context context, View view) {
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
@@ -99,10 +96,6 @@ public class newPost extends Fragment implements AdapterView.OnItemSelectedListe
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
-
-    }
-
-    public void sendPostToGroup(){
 
     }
 }
