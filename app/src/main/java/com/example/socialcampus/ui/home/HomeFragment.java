@@ -29,9 +29,9 @@ public class HomeFragment extends Fragment {
     private GroupBoxAdapter gAdapter;
     private RecyclerView postRecyclerView;
     private PostListAdapter postAdapter;
-    private final ArrayList<PostCard> postCardList      = new ArrayList<>();
-    private final LinkedList<GroupBoxCard> gCardList    = new LinkedList<>();
-    private final String LOG_TAG                        = HomeFragment.class.getSimpleName();
+    private final ArrayList<PostCard> postCardList = new ArrayList<>();
+    private final LinkedList<GroupBoxCard> gCardList = new LinkedList<>();
+    private final String LOG_TAG = HomeFragment.class.getSimpleName();
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 

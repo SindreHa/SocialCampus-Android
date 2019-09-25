@@ -46,8 +46,8 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
     private PostListAdapter postAdapter;
     private SwipeRefreshLayout refresh;
     private RestDbAdapterVolley restDb;
-    private ArrayList<PostCard> postCardList    = new ArrayList<>();
-    private final String LOG_TAG                = GroupFragment.class.getSimpleName();
+    private ArrayList<PostCard> postCardList = new ArrayList<>();
+    private final String LOG_TAG = GroupFragment.class.getSimpleName();
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 

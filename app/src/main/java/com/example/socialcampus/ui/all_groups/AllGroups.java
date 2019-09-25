@@ -25,9 +25,9 @@ public class AllGroups extends Fragment {
     private RecyclerView groupRecyclerViewUteliv;
     private RecyclerView groupRecyclerViewSport;
     private GroupBoxAdapter groupAdapter;
-    private final LinkedList<GroupBoxCard> alleGrupper  = new LinkedList<>();
-    private final LinkedList<GroupBoxCard> uteliv       = new LinkedList<>();
-    private final LinkedList<GroupBoxCard> sport        = new LinkedList<>();
+    private final LinkedList<GroupBoxCard> alleGrupper = new LinkedList<>();
+    private final LinkedList<GroupBoxCard> uteliv = new LinkedList<>();
+    private final LinkedList<GroupBoxCard> sport = new LinkedList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
