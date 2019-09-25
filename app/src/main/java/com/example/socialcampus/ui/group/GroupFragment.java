@@ -82,7 +82,9 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
 
         //Refresh listener
         refresh = view.findViewById(R.id.group_refresh);
-        refresh.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
+        refresh.setColorSchemeColors(getResources().getColor(R.color.colorAccent), Color.RED, Color.GREEN);
+        refresh.setProgressBackgroundColorSchemeColor(getResources().getColor(R.color.colorPrimary));
+        refresh.setRefreshing(true);
         refresh.setOnRefreshListener(
                 new SwipeRefreshLayout.OnRefreshListener() {
                     @Override
@@ -189,8 +191,6 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
         restDb= new RestDbAdapterVolley(getContext());
         postCardList.clear();
         getPostData();
-        //Stopper refresh ikonet
-        refresh.setRefreshing(false);
         //Aktiver scrolling for recyclerview etter animasjon
         postRecyclerView.setLayoutFrozen(false);
     }
@@ -219,6 +219,8 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
             Log.d(LOG_TAG, response);
             postCardList = PostCard.lagPostListe(response);
             updatePostRecycler();
+            //Stopper refresh ikonet
+            refresh.setRefreshing(false);
         }catch (JSONException e){
 
         }
