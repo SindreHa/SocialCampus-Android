@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -41,26 +40,44 @@ import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 
 public class GroupFragment extends Fragment implements Response.Listener<String>, Response.ErrorListener{
 
-    public final static String ENDPOINT = "https://itfag.usn.no/~kvisli/api.php";
-    private View root;
-    private ArrayList<PostCard> postCardList = new ArrayList<>();
+    private View view;
     private RecyclerView postRecyclerView;
     private PostListAdapter postAdapter;
-    private RestDbAdapterVolley restDb;
     private SwipeRefreshLayout refresh;
-    Boolean refreshed = false;
-    private PostCard postCard = null;
-    String LOG_TAG = GroupFragment.class.getSimpleName();
+
+    public final static String ENDPOINT         = "https://itfag.usn.no/~kvisli/api.php";
+    private ArrayList<PostCard> postCardList    = new ArrayList<>();
+    private RestDbAdapterVolley restDb          = new RestDbAdapterVolley(getContext());
+    String LOG_TAG                              = GroupFragment.class.getSimpleName();
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        this.root = inflater.inflate(R.layout.fragment_group, container, false);
+        this.view = inflater.inflate(R.layout.fragment_group, container, false);
 
-        postRecyclerView = root.findViewById(R.id.group_post_recycler);
+        initializeView();
+        initializeData();
+
+        return view;
+    }
+
+    private void initializeView() {
+        recyclerViewInit();
+        tabViewInit();
+        floatingButtonInit();
+    }
+
+    private void recyclerViewInit() {
+        postRecyclerView = view.findViewById(R.id.group_post_recycler);
         postAdapter = new PostListAdapter(getContext(), postCardList);
         postRecyclerView.setAdapter(postAdapter);
         postRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
-        refresh = root.findViewById(R.id.group_refresh);
+        recyclerViewMethods();
+    }
+
+    private void recyclerViewMethods() {
+
+        //Refresh listener
+        refresh = view.findViewById(R.id.group_refresh);
         refresh.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
         refresh.setOnRefreshListener(
                 new SwipeRefreshLayout.OnRefreshListener() {
@@ -71,16 +88,10 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
                 }
         );
 
-        FloatingActionButton newPost = root.findViewById(R.id.new_post_button);
-        //https://developer.android.com/guide/navigation/navigation-getting-started#java
-        newPost.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_nav_groups_to_nav_new_post));
-
-        initializeData(20);
-
-        restDb = new RestDbAdapterVolley(getContext());
-
-        ItemTouchHelper.SimpleCallback helper = new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-
+        //Swipe listener
+        ItemTouchHelper.SimpleCallback helper = new ItemTouchHelper.SimpleCallback(
+                0,ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT)
+        {
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder,
                                   RecyclerView.ViewHolder target) {
@@ -107,7 +118,10 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
                 }
             }
 
-            //https://github.com/xabaras/RecyclerViewSwipeDecorator
+            /*
+            * Bibliotek fra github for å sette ikoner og tekst bak elementer i recyclerview som vises på swipe
+            * https://github.com/xabaras/RecyclerViewSwipeDecorator
+            */
             @Override
             public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
                 super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
@@ -126,23 +140,25 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
         };
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(helper);
         itemTouchHelper.attachToRecyclerView(postRecyclerView);
+    }
 
-        TabLayout tabLayout = root.findViewById(R.id.tab_sort_group);
+    private void tabViewInit() {
+        TabLayout tabLayout = view.findViewById(R.id.tab_sort_group);
 
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener()
+        {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
 
                 switch (tab.getPosition()) {
                     case 0:
-                        initializeData(10);
+                        initializeData();
                         break;
                     case 1:
-                        initializeData(2);
+                        initializeData();
                         break;
                     case 2:
-                        initializeData(3);
+                        initializeData();
                         break;
                 }
             }
@@ -157,36 +173,38 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
 
             }
         });
-
-        return root;
     }
 
+    private void floatingButtonInit() {
+        FloatingActionButton newPost = view.findViewById(R.id.new_post_button);
+        //https://developer.android.com/guide/navigation/navigation-getting-started#java
+        newPost.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_nav_groups_to_nav_new_post));
+    }
 
-    private void initializeData(int antallPoster) {
+    private void initializeData() {
         postCardList.clear();
-        lesEnPost();
+        getPostData();
+        //Stopper refresh ikonet
         refresh.setRefreshing(false);
         //Aktiver scrolling for recyclerview etter animasjon
         postRecyclerView.setLayoutFrozen(false);
-
-        /*
-        postCardList.add(new PostCard(getString(R.string.placeholder_title), getString(R.string.username), getString(R.string.placeholder_group_name), getString(R.string.placeholder_text),
-                    getString(R.string.placeholder_comment_count), getString(R.string.placeholder_like_count), getString(R.string.placeholder_timestamp)));
-        */
-
     }
 
-    public void lesEnPost() {
+    private boolean isOnline() {
+        ConnectivityManager conMgr = (ConnectivityManager) getActivity().getSystemService(Activity.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = conMgr.getActiveNetworkInfo();
+        return (networkInfo != null && networkInfo.isConnected());
+    }
+
+    public void getPostData() {
         //String postListeURL = ENDPOINT + "/Post/" + postNr.trim();
         if (isOnline()){
-
             RequestQueue queue = Volley.newRequestQueue(getContext());
             StringRequest stringRequest =
                     new StringRequest(Request.Method.GET, "https://itfag.usn.no/~146005/api.php/post?order=id,desc&transform=1", this, this);
             queue.add(stringRequest);
         }else{
-            Toast.makeText(getContext(), "Nettverksfeil.",
-                    Toast.LENGTH_SHORT).show();
+            makeSnackbar("Nettverksfeil");
         }
     }
 
@@ -195,7 +213,7 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
         try{
             Log.d(LOG_TAG, response);
             postCardList = PostCard.lagPostListe(response);
-            oppdaterPostView(postCardList);
+            oppdaterPostView();
         }catch (JSONException e){
 
         }
@@ -205,24 +223,16 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
         postAdapter.notifyDataSetChanged();
     }
 
-    public void oppdaterPostView(ArrayList<PostCard> nyPostListe) {
-        postAdapter = new PostListAdapter(getContext(), postCardList);
-        postRecyclerView.setAdapter(postAdapter);
-        postRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-    }
-
     @Override
     public void onErrorResponse(VolleyError error) {
         Toast.makeText(getContext(), error.getMessage(),
                 Toast.LENGTH_SHORT).show();
     }
 
-
-
-    private boolean isOnline() {
-        ConnectivityManager conMgr = (ConnectivityManager) getActivity().getSystemService(Activity.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = conMgr.getActiveNetworkInfo();
-        return (networkInfo != null && networkInfo.isConnected());
+    public void oppdaterPostView() {
+        postAdapter = new PostListAdapter(getContext(), postCardList);
+        postRecyclerView.setAdapter(postAdapter);
+        postRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     private void postAnimation(){
@@ -275,7 +285,7 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
                                     .setStartDelay(i * 50)
                                     .withEndAction(new Thread(new Runnable() {
                                         public void run() {
-                                            initializeData(0);
+                                            initializeData();
                                         }
                                     }))
                                     .start();
@@ -283,5 +293,16 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
                         return true;
                     }
                 });
+    }
+
+    private void makeSnackbar(String melding) {
+        final Snackbar snackBar = Snackbar.make(view, melding, Snackbar.LENGTH_LONG);
+        snackBar.setAction("Ok", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                snackBar.dismiss();
+            }
+        });
+        snackBar.show();
     }
 }
