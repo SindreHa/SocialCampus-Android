@@ -78,7 +78,7 @@ public class newPost extends Fragment implements AdapterView.OnItemSelectedListe
                 PostCard postCard = new PostCard(mTitle, "Brukernavn", "Tennis", mContent, "344", "1273", "19:53" );
                 db.insertPostCard(postCard);
                 hideKeyboardFrom(getContext(), v);
-                Navigation.findNavController(view).navigate(R.id.action_nav_new_post_to_nav_groups);
+                Navigation.findNavController(view).popBackStack();
             }
         });
 
