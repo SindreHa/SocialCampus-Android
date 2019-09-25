@@ -75,7 +75,8 @@ public class newPost extends Fragment implements AdapterView.OnItemSelectedListe
                //Snackbar.make(getView(), "yo", Snackbar.LENGTH_LONG).show();
                 String mTitle = title.getText().toString();
                 String mContent = content.getText().toString();
-                PostCard postCard = new PostCard(mTitle, "Brukernavn", "Tennis", mContent, "344", "1273", "19:53" );
+
+                PostCard postCard = new PostCard(mTitle, "Brukernavn", "Tennis", mContent, "344", "1273" );
                 db.insertPostCard(postCard);
                 hideKeyboardFrom(getContext(), v);
                 Navigation.findNavController(view).navigate(R.id.action_nav_new_post_to_nav_groups);
