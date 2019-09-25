@@ -24,23 +24,131 @@ import java.util.LinkedList;
 
 public class HomeFragment extends Fragment {
 
-    private final LinkedList<GroupBoxCard> gCardList = new LinkedList<>();
+    private View view;
     private RecyclerView gRecyclerView;
     private GroupBoxAdapter gAdapter;
-    private final ArrayList<PostCard> postCardList = new ArrayList<>();
     private RecyclerView postRecyclerView;
     private PostListAdapter postAdapter;
+    private final ArrayList<PostCard> postCardList      = new ArrayList<>();
+    private final LinkedList<GroupBoxCard> gCardList    = new LinkedList<>();
+    private final String LOG_TAG                        = HomeFragment.class.getSimpleName();
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
+        this.view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        TabLayout tabLayout = root.findViewById(R.id.tab_sort_home);
+        initializeView();
 
-        gRecyclerView = root.findViewById(R.id.recyclerView_group);
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        initializeData();
+    }
+
+    private void initializeView() {
+        recyclerViewInit();
+        tabViewInit();
+    }
+
+    private void recyclerViewInit() {
+        gRecyclerView = view.findViewById(R.id.recyclerView_group);
         gAdapter = new GroupBoxAdapter(getContext(), gCardList);
         gRecyclerView.setAdapter(gAdapter);
 
+        /*
+        * Setter retning på LinearLayout basert på orientering av device
+        * https://stackoverflow.com/questions/2795833/check-orientation-on-android-phone
+        */
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            gRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        } else {
+            gRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        }
+
+        postRecyclerView = view.findViewById(R.id.group_post_recycler_home);
+        postAdapter = new PostListAdapter(getContext(), postCardList);
+        postRecyclerView.setAdapter(postAdapter);
+        postRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+
+    }
+
+    private void tabViewInit() {
+        TabLayout tabLayout = view.findViewById(R.id.tab_sort_home);
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+
+                switch (tab.getPosition()) {
+                    case 0:
+                        initializeData();
+                        break;
+                    case 1:
+                        initializeData();
+                        break;
+                    case 2:
+                        initializeData();
+                        break;
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+    }
+
+    private void initializeData() {
+        getData();
+        groupBoxAnimation();
+        postAnimation();
+    }
+
+    private void getData() {
+        //https://stackoverflow.com/questions/29819204/could-android-store-drawable-ids-like-an-integer-array
+        TypedArray tArray = getResources().obtainTypedArray(
+                R.array.group_pictures);
+        int count = tArray.length();
+        int[] ids = new int[count];
+        for (int i = 0; i < ids.length; i++) {
+            ids[i] = tArray.getResourceId(i, 0);
+        }
+        tArray.recycle();
+
+        int[] gruppeBilder = ids;
+        String[] gruppeTittel = getResources().getStringArray(R.array.group_title);
+        String[] gruppeAntMeldemmer = getResources().getStringArray(R.array.group_member_count);
+        String[] gruppeAntPoster = getResources().getStringArray(R.array.group_post_count);
+
+        setData(gruppeBilder, gruppeTittel, gruppeAntMeldemmer, gruppeAntPoster);
+    }
+
+    private void setData(int[] groupImg, String[] groupTitle, String[] groupNumMembers, String[] groupNumPosts) {
+        gCardList.clear();
+        for (int i = 0; i < 10; i++){
+            gCardList.addLast(new GroupBoxCard(groupImg[i], groupTitle[i], groupNumMembers[i], groupNumPosts[i]));
+        }
+        gAdapter.notifyDataSetChanged();
+
+        postCardList.clear();
+        for (int i=0; i<20; i++) {
+            postCardList.add(new PostCard(getString(R.string.placeholder_title), getString(R.string.username), getString(R.string.placeholder_group_name), getString(R.string.placeholder_text),
+                    getString(R.string.placeholder_comment_count), getString(R.string.placeholder_like_count), getString(R.string.placeholder_timestamp)));
+        }
+        postAdapter.notifyDataSetChanged();
+    }
+
+    private void groupBoxAnimation() {
         //https://stackoverflow.com/questions/38909542/how-to-animate-recyclerview-items-when-adapter-is-initialized-in-order
         gRecyclerView.getViewTreeObserver().addOnPreDrawListener(
                 new ViewTreeObserver.OnPreDrawListener() {
@@ -62,85 +170,10 @@ public class HomeFragment extends Fragment {
                         return true;
                     }
                 });
-
-        //https://stackoverflow.com/questions/2795833/check-orientation-on-android-phone
-        int orientation = getResources().getConfiguration().orientation;
-        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            gRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        } else {
-            gRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        }
-
-        postRecyclerView = root.findViewById(R.id.group_post_recycler_home);
-        postAdapter = new PostListAdapter(getContext(), postCardList);
-        postRecyclerView.setAdapter(postAdapter);
-        postRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-
-        //https://stackoverflow.com/questions/38909542/how-to-animate-recyclerview-items-when-adapter-is-initialized-in-order
-
-
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-
-                switch (tab.getPosition()) {
-                    case 0:
-                        initializeData(10);
-                        break;
-                    case 1:
-                        initializeData(2);
-                        break;
-                    case 2:
-                        initializeData(3);
-                        break;
-                }
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-           @Override
-           public void onTabReselected(TabLayout.Tab tab) {
-
-           }
-        });
-
-        initializeData(10);
-
-        return root;
     }
 
-    private void initializeData(int antallPoster) {
-
-        //https://stackoverflow.com/questions/29819204/could-android-store-drawable-ids-like-an-integer-array
-        TypedArray tArray = getResources().obtainTypedArray(
-                R.array.group_pictures);
-        int count = tArray.length();
-        int[] ids = new int[count];
-        for (int i = 0; i < ids.length; i++) {
-            ids[i] = tArray.getResourceId(i, 0);
-        }
-        tArray.recycle();
-
-        int[] gruppeBilder = ids;
-        String[] gruppeTittel = getResources().getStringArray(R.array.group_title);
-        String[] gruppeAntMeldemmer = getResources().getStringArray(R.array.group_member_count);
-        String[] gruppeAntPoster = getResources().getStringArray(R.array.group_post_count);
-
-        gCardList.clear();
-        for (int i = 0; i < 10; i++){
-            gCardList.addLast(new GroupBoxCard(gruppeBilder[i], gruppeTittel[i], gruppeAntMeldemmer[i], gruppeAntPoster[i]));
-        }
-
-        postCardList.clear();
-        for (int i=0; i<antallPoster; i++) {
-            postCardList.add(new PostCard(getString(R.string.placeholder_title), getString(R.string.username), getString(R.string.placeholder_group_name), getString(R.string.placeholder_text),
-                    getString(R.string.placeholder_comment_count), getString(R.string.placeholder_like_count), getString(R.string.placeholder_timestamp)));
-        }
-
+    private void postAnimation() {
+        //https://stackoverflow.com/questions/38909542/how-to-animate-recyclerview-items-when-adapter-is-initialized-in-order
         postRecyclerView.getViewTreeObserver().addOnPreDrawListener(
                 new ViewTreeObserver.OnPreDrawListener() {
 
@@ -165,15 +198,6 @@ public class HomeFragment extends Fragment {
                         return true;
                     }
                 });
-
-        gAdapter.notifyDataSetChanged();
-        postAdapter.notifyDataSetChanged();
-    }
-
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-
     }
 
     private void makeSnackbar(String melding) {
