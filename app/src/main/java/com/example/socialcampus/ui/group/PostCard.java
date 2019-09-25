@@ -36,7 +36,7 @@ public class PostCard {
     static final String POST_ID            = "id";
 
     public PostCard(String postTitle, String postAuthor, String postGroupName, String postDescription,
-                    String postCommentCount, String postLikeCount, String postTimestamp){
+                    String postCommentCount, String postLikeCount){
         //this.sportImg = sportImg;
         this.postTitle = postTitle;
         this.postAuthor = postAuthor;
@@ -44,7 +44,6 @@ public class PostCard {
         this.postDescription = postDescription;
         this.postCommentCount = postCommentCount;
         this.postLikeCount = postLikeCount;
-        this.postTimestamp = postTimestamp;
     }
 
     public PostCard(JSONObject jsonPost) {
