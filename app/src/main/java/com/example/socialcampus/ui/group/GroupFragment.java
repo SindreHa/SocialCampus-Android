@@ -141,8 +141,8 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                PostCard post = postCardList.get(viewHolder.getAdapterPosition());
                 if (direction == ItemTouchHelper.LEFT) {
-                    PostCard post = postCardList.get(viewHolder.getAdapterPosition());
                     restDb.deletePost(post.getPostId());
                     postCardList.remove(viewHolder.getAdapterPosition());
                     postAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
@@ -156,6 +156,13 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
                         }
                     });
                     snackBar.show();
+                }
+                else if(direction == ItemTouchHelper.RIGHT){
+                    Bundle b = new Bundle();
+                    b.putString("title", post.getPostTitle());
+                    b.putString("content", post.getPostDescription());
+                    b.putString("id", post.getPostId());
+                    Navigation.findNavController(view).navigate(R.id.action_nav_groups_to_nav_new_post, b);
                 }
             }
 

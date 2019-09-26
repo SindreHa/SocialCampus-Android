@@ -38,6 +38,8 @@ public class newPost extends Fragment implements AdapterView.OnItemSelectedListe
     private RestDbAdapterVolley db;
     private View view;
 
+    private String editPostKey;
+
     public newPost() {
     }
 
@@ -66,20 +68,36 @@ public class newPost extends Fragment implements AdapterView.OnItemSelectedListe
             spinner.setAdapter(adapter);
         }
 
+        final Bundle arguments = getArguments();
+        if(arguments != null){
+            this.title.setText(arguments.getString("title"));
+            this.content.setText(arguments.getString("content"));
+            this.editPostKey = arguments.getString("id");
+        }
+
         //Funksjon for trykk på publiseringsknapp
         sendPostButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String mTitle = title.getText().toString();
-                String mContent = content.getText().toString();
-                PostCard postCard = new PostCard(mTitle, "Brukernavn", "Tennis", mContent, "344", "1273" );
-                db.insertPostCard(postCard);
-                hideKeyboardFrom(getContext(), v);
+                if(arguments != null){
+                    db.updatePost(editPostKey, new PostCard(title.getText().toString(), "Brukernavn", "Golf", content.getText().toString(), "344", "1273"));
+                    hideKeyboardFrom(getContext(), v);
+                    Navigation.findNavController(view).popBackStack();
+                }else{
+                    String mTitle = title.getText().toString();
+                    String mContent = content.getText().toString();
+                    PostCard postCard = new PostCard(mTitle, "Brukernavn", "Tennis", mContent, "344", "1273" );
+                    db.insertPostCard(postCard);
+                    hideKeyboardFrom(getContext(), v);
 
-                //Ødelegger new_post fargmentet https://developer.android.com/guide/navigation/navigation-navigate#back-stack
-                Navigation.findNavController(view).popBackStack();
+                    //Ødelegger new_post fargmentet https://developer.android.com/guide/navigation/navigation-navigate#back-stack
+                    Navigation.findNavController(view).popBackStack();
+                }
             }
         });
+
+
+
         return root;
     }
 
