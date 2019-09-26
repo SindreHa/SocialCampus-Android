@@ -72,7 +72,6 @@ public class newPost extends Fragment implements AdapterView.OnItemSelectedListe
             public void onClick(View v) {
                 String mTitle = title.getText().toString();
                 String mContent = content.getText().toString();
-
                 PostCard postCard = new PostCard(mTitle, "Brukernavn", "Tennis", mContent, "344", "1273" );
                 db.insertPostCard(postCard);
                 hideKeyboardFrom(getContext(), v);

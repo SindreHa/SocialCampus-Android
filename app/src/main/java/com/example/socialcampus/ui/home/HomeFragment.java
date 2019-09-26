@@ -152,7 +152,7 @@ public class HomeFragment extends Fragment {
         postCardList.clear();
         for (int i=0; i<20; i++) {
             postCardList.add(new PostCard(getString(R.string.placeholder_title), getString(R.string.username), getString(R.string.placeholder_group_name), getString(R.string.placeholder_text),
-                    getString(R.string.placeholder_comment_count), getString(R.string.placeholder_like_count), getString(R.string.placeholder_timestamp)));
+                    getString(R.string.placeholder_comment_count), getString(R.string.placeholder_like_count)));
         }
         postAdapter.notifyDataSetChanged();
         postAnimation();

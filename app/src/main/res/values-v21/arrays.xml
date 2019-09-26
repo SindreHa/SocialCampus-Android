@@ -1,21 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="group_title">
+        <item>Basketball</item>
+        <item>Spilling</item>
+        <item>Bokklubb</item>
         <item>Tennis</item>
         <item>Fotball</item>
         <item>Bordtennis</item>
-        <item>Gaming</item>
         <item>Friluft</item>
-        <item>Tennis</item>
-        <item>Fotball</item>
-        <item>Bordtennis</item>
-        <item>Gaming</item>
-        <item>Friluft</item>
-        <item>Tennis</item>
-        <item>Fotball</item>
-        <item>Bordtennis</item>
-        <item>Gaming</item>
-        <item>Friluft</item>
+        <item>Musikk</item>
+        <item>Volleyball</item>
+        <item>Jogging</item>
     </string-array>
 
     <string-array name="group_member_count">
@@ -28,12 +23,7 @@
         <item>124</item>
         <item>53</item>
         <item>32</item>
-        <item>1</item>
-        <item>53</item>
-        <item>45</item>
-        <item>36</item>
-        <item>74</item>
-        <item>27</item>
+        <item>41</item>
     </string-array>
 
     <string-array name="group_post_count">
@@ -47,30 +37,33 @@
         <item>23</item>
         <item>432</item>
         <item>112</item>
-        <item>53</item>
-        <item>32</item>
-        <item>73</item>
-        <item>65</item>
-        <item>72</item>
     </string-array>
 
     <integer-array name="group_pictures">
+        <item>@drawable/basketball</item>
+        <item>@drawable/gaming</item>
+        <item>@drawable/books</item>
         <item>@drawable/tennis</item>
         <item>@drawable/fotball</item>
         <item>@drawable/bordtennis</item>
-        <item>@drawable/gaming</item>
         <item>@drawable/friluft</item>
-        <item>@drawable/tennis</item>
-        <item>@drawable/fotball</item>
-        <item>@drawable/bordtennis</item>
-        <item>@drawable/gaming</item>
-        <item>@drawable/friluft</item>
-        <item>@drawable/tennis</item>
-        <item>@drawable/fotball</item>
-        <item>@drawable/bordtennis</item>
-        <item>@drawable/gaming</item>
-        <item>@drawable/friluft</item>
+        <item>@drawable/musikk</item>
+        <item>@drawable/volleyball</item>
+        <item>@drawable/jogging</item>
     </integer-array>
+
+    <string-array name="group_pictures_stringpath">
+        <item>R.drawable.basketball</item>
+        <item>R.drawable.gaming</item>
+        <item>R.drawable.books</item>
+        <item>R.drawable.tennis</item>
+        <item>R.drawable.fotball</item>
+        <item>R.drawable.bordtennis</item>
+        <item>R.drawable.friluft</item>
+        <item>R.drawable.musikk</item>
+        <item>R.drawable.volleyball</item>
+        <item>R.drawable.jogging</item>
+    </string-array>
 
     <integer-array name="about_us_pictures">
         <item>@drawable/sindre</item>

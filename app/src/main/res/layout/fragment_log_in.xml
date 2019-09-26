@@ -40,7 +40,7 @@
             android:hint="@string/username">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/username_login"
+                android:id="@+id/etLoginUsername"
                 android:inputType="text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -54,7 +54,7 @@
             android:hint="@string/password">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/password_login"
+                android:id="@+id/etLoginPassword"
                 android:inputType="textPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -62,7 +62,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/login_button"
+            android:id="@+id/btnLogin"
             style="@android:style/Widget.Material.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -80,8 +80,8 @@
             android:orientation="vertical"
             android:gravity="center">
 
-            <TextView
-                android:id="@+id/createUser"
+            <Button
+                android:id="@+id/btnLoginRegister"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="@string/no_user"
@@ -90,7 +90,7 @@
                 android:textColor="@color/textWhiteSecondary"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
 
-            <TextView
+            <Button
                 android:id="@+id/forgotpassword"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
