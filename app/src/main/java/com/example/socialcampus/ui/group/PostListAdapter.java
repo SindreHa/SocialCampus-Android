@@ -14,6 +14,7 @@ import com.example.socialcampus.R;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Random;
 
 public class PostListAdapter extends RecyclerView.Adapter<com.example.socialcampus.ui.group.PostListAdapter.PostCardHolder>{
 
@@ -70,8 +71,20 @@ public class PostListAdapter extends RecyclerView.Adapter<com.example.socialcamp
         holder.postAuthor.setText(postCardList.get(position).getPostAuthor());
         holder.postGroupName.setText(postCardList.get(position).getPostGroupName());
         holder.postDescription.setText(postCardList.get(position).getPostDescription());
-        holder.postCommentCount.setText(postCardList.get(position).getPostCommentCount());
-        holder.postLikeCount.setText(postCardList.get(position).getPostLikeCount());
+
+        //Hardkodet random kommentartelling, prioritert bort funksjon
+        Random ranCom = new Random();
+        String randComCount = ranCom.nextInt(20) + "";
+        String sComCount;
+        if(randComCount.matches("1")) {
+            sComCount = randComCount + " kommentar"; }
+        else {
+            sComCount = randComCount + " kommentarer"; }
+        holder.postCommentCount.setText(sComCount);
+
+        Random ranLike = new Random();
+        String randLikeCount = ranLike.nextInt(20) + " liker";
+        holder.postLikeCount.setText(randLikeCount);
         holder.postTimestamp.setText(postCardList.get(position).getPostTimestamp());
         setAnimation(holder.itemView, position);
     }

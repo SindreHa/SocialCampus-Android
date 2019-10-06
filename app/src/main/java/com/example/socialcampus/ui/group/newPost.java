@@ -27,6 +27,8 @@ import android.widget.Toast;
 import com.example.socialcampus.R;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.Random;
+
 /**
  * Created by Sindre Haavaldsen on 17.09.19.
  */
@@ -80,17 +82,40 @@ public class newPost extends Fragment implements AdapterView.OnItemSelectedListe
             @Override
             public void onClick(View v) {
                 if(arguments != null){
-                    db.updatePost(editPostKey, new PostCard(title.getText().toString(), "Brukernavn", "Golf", content.getText().toString(), "344", "1273"));
+                    Random ran = new Random();
+                    String randLikes = ran.nextInt(20) + "";
+
+                    Random ranCom = new Random();
+                    String randComCount = ranCom.nextInt(20) + "";
+                    String sComCount;
+                    if(randComCount.matches("1")) {
+                        sComCount = randComCount + " kommentar"; }
+                    else {
+                        sComCount = randComCount + " kommentarer"; }
+
+                    db.updatePost(editPostKey, new PostCard(title.getText().toString(), "78", "9", content.getText().toString(), sComCount, randLikes));
                     hideKeyboardFrom(getContext(), v);
                     Navigation.findNavController(view).popBackStack();
                 }else{
                     String mTitle = title.getText().toString();
                     String mContent = content.getText().toString();
-                    PostCard postCard = new PostCard(mTitle, "Brukernavn", "Tennis", mContent, "344", "1273" );
+                    Random ran = new Random();
+
+                    Random ranCom = new Random();
+                    String randComCount = ranCom.nextInt(20) + "";
+                    String sComCount;
+                    if(randComCount.matches("1")) {
+                        sComCount = randComCount + " kommentar"; }
+                    else {
+                        sComCount = randComCount + " kommentarer"; }
+
+                    String randLikes = ran.nextInt(20) + "";
+                    PostCard postCard = new PostCard(mTitle, "78", "9", mContent, sComCount, randLikes );
                     db.insertPostCard(postCard);
                     hideKeyboardFrom(getContext(), v);
 
-                    //Ødelegger new_post fargmentet https://developer.android.com/guide/navigation/navigation-navigate#back-stack
+                    //Ødelegger instansen av
+                    // new_post fargmentet https://developer.android.com/guide/navigation/navigation-navigate#back-stack
                     Navigation.findNavController(view).popBackStack();
                 }
             }

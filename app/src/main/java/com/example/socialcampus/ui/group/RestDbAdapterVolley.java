@@ -68,7 +68,7 @@ public class RestDbAdapterVolley {
             queue.add(jsonObjRequest);
         }
     }
-    
+
     // Fant ikke en u-depricata versjon av samme koden...
     public boolean isOnline() {
         ConnectivityManager conMgr = (ConnectivityManager) ctx.getSystemService(Activity.CONNECTIVITY_SERVICE);

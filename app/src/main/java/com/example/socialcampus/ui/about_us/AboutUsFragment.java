@@ -63,10 +63,7 @@ public class AboutUsFragment extends Fragment {
         return root;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+    private void initializeView(){}
 
     private void initializeData() {
 

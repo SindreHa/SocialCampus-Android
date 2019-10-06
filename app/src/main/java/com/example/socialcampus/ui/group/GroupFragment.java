@@ -246,7 +246,7 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
         if (isOnline()){
             RequestQueue queue = Volley.newRequestQueue(getContext());
             StringRequest stringRequest =
-                    new StringRequest(Request.Method.GET, "https://itfag.usn.no/~146005/api.php/post?order=id,desc&transform=1", this, this);
+                    new StringRequest(Request.Method.GET, "https://itfag.usn.no/~888591/getPost.php?action=get_post_list&group_id=1", this, this);
             queue.add(stringRequest);
         }else{
             makeSnackbar("Nettverksfeil");
@@ -256,7 +256,7 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
     @Override
     public void onResponse(String response) {
         try{
-            //Log.d(LOG_TAG, response);
+            Log.d(LOG_TAG, response);
             postCardList = PostCard.lagPostListe(response);
             updatePostRecycler();
             //Stopper refresh ikonet

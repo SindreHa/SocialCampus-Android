@@ -52,19 +52,6 @@
         <item>@drawable/jogging</item>
     </integer-array>
 
-    <string-array name="group_pictures_stringpath">
-        <item>R.drawable.basketball</item>
-        <item>R.drawable.gaming</item>
-        <item>R.drawable.books</item>
-        <item>R.drawable.tennis</item>
-        <item>R.drawable.fotball</item>
-        <item>R.drawable.bordtennis</item>
-        <item>R.drawable.friluft</item>
-        <item>R.drawable.musikk</item>
-        <item>R.drawable.volleyball</item>
-        <item>R.drawable.jogging</item>
-    </string-array>
-
     <integer-array name="about_us_pictures">
         <item>@drawable/sindre</item>
         <item>@drawable/jan</item>
