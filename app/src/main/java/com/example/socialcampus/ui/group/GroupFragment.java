@@ -264,7 +264,6 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
         }catch (JSONException e){
 
         }
-        //Aktiver scrolling for recyclerview etter animasjon
         postAdapter.notifyDataSetChanged();
         postAnimation();
     }
@@ -282,8 +281,7 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
     }
 
     private void postAnimation(){
-        //Deaktiver scrolling for å unngå krasj som skjer hvor man scroller samtidig som animasjon
-        //postRecyclerView.setLayoutFrozen(true);
+        //https://stackoverflow.com/questions/38909542/how-to-animate-recyclerview-items-when-adapter-is-initialized-in-order
         postRecyclerView.getViewTreeObserver().addOnPreDrawListener(
                 new ViewTreeObserver.OnPreDrawListener() {
                     @Override
@@ -310,8 +308,7 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
     }
 
     private void postAnimationOut(){
-        //Deaktiver scrolling for å unngå krasj som skjer hvor man scroller samtidig som animasjon
-        //postRecyclerView.setLayoutFrozen(true);
+        //https://stackoverflow.com/questions/38909542/how-to-animate-recyclerview-items-when-adapter-is-initialized-in-order
         postRecyclerView.getViewTreeObserver().addOnPreDrawListener(
                 new ViewTreeObserver.OnPreDrawListener() {
                     @Override
@@ -332,8 +329,6 @@ public class GroupFragment extends Fragment implements Response.Listener<String>
                                     .withEndAction(new Thread(new Runnable() {
                                         public void run() {
                                             initializeData();
-                                            //Aktiver scrolling for recyclerview etter animasjon
-                                            //postRecyclerView.setLayoutFrozen(false);
                                         }
                                     }))
                                     .start();
